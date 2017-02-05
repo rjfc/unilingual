@@ -218,6 +218,12 @@ h5 {
     margin-right: 7px;
 }
 
+#image-up-triangle-icon  {
+    position: relative;
+    top: 4px;
+    height: 15px;
+}
+
 /* Mobile first queries */
 @media (min-width: 200px) {
     .hero {
