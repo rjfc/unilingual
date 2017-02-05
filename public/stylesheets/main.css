@@ -145,7 +145,7 @@ a:hover {
 
 #features {
     background-color: #EFF7F4;
-    height: 700px;
+    height: 650px;
 }
 
 #features > .container > .row > .four > img {
@@ -190,6 +190,10 @@ p {
     #hero-tagline {
         margin-bottom: 20px;
     }
+
+    #features {
+        height: 1850px;
+    }
 }
 
 /* Larger than mobile */
@@ -205,6 +209,10 @@ p {
 
     #hero-tagline {
         margin-bottom: 20px;
+    }
+
+    #features {
+        height: 1550px;
     }
 }
 
@@ -222,6 +230,10 @@ p {
     #hero-tagline {
         margin-bottom: 90px;
     }
+
+    #features {
+        height: 850px;
+    }
 }
 
 /* Larger than tablet */
@@ -237,6 +249,10 @@ p {
 
     #hero-tagline {
         margin-bottom: 90px;
+    }
+
+    #features {
+        height: 750px;
     }
 }
 
@@ -254,6 +270,10 @@ p {
     #hero-tagline {
         margin-bottom: 90px;
     }
+
+    #features {
+        height: 650px;
+    }
 }
 
 /* Larger than Desktop HD */
@@ -269,6 +289,10 @@ p {
 
     #hero-tagline {
         margin-bottom: 90px;
+    }
+
+    #features {
+        height: 650px;
     }
 }
 
