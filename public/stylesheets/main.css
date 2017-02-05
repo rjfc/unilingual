@@ -31,51 +31,21 @@ ______ ____  _   _ _______ _____
 */
 /*
 Lato
-font-family: 'Lato', sans-serif;*/
+font-family: 'Lato', sans-serif;
+*/
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
+/*
+ General
+   _____ ______ _   _ ______ _____            _
+  / ____|  ____| \ | |  ____|  __ \     /\   | |
+ | |  __| |__  |  \| | |__  | |__) |   /  \  | |
+ | | |_ |  __| | . ` |  __| |  _  /   / /\ \ | |
+ | |__| | |____| |\  | |____| | \ \  / ____ \| |____
+  \_____|______|_| \_|______|_|  \_\/_/    \_\______|
+ */
 body {
     margin: 0;
-}
-
-.center {
-    text-align: center;
-}
-
-.hero {
-    background-color: #E9F2EF;
-    height: 900px;
-    padding-top: 30px;
-}
-
-#header-unilingual-logo {
-    height: 65px;
-    margin-bottom: 35px;
-}
-
-#hero-tagline {
-    margin-bottom: 90px;
-}
-
-#hero-tagline h1 {
-    font-family: 'Lato', sans-serif;
-    font-weight: Bold;
-    font-size: 80px;
-    margin: -8px;
-    color: #2C3E50;
-}
-
-.input-wrapper {
-    margin: 0;
-    height: 40px;
-    position: relative;
-}
-
-.input-wrapper > img {
-    height: 19px;
-    position: absolute;
-    left: 11px;
-    top: 14px;
 }
 
 input[name="username"], input[name="email"], input[name="password"] {
@@ -89,22 +59,8 @@ input[type="text"], input[type="password"] {
     font-family: 'Lato', sans-serif;
 }
 
-#sign-up-button-green-large {
-    margin-top: 10px;
-    border-radius: 0px;
-    height: 50px;
-    border: none;
-    background-color: #3ECF8E;
-    color: White;
-    font-family: 'Lato', sans-serif !important;
-    font-size: 17px;
-    font-weight: 400;
-    text-transform: none;
-    transition: 0.2s;
-}
-
-#sign-up-button-green-large:hover {
-    background-color: #52CF9E;
+input[type="text"]:focus, input[type="password"]:focus {
+    border: 1px solid #3ECF8E;
 }
 
 label {
@@ -114,14 +70,87 @@ label {
     margin: 10px 0px 0px 0px;
 }
 
-#agree-terms {
-    margin-top: 15px;
+a:hover {
+    cursor: pointer;
 }
 
-#agree-terms input[type="checkbox"] {
-    margin-left: 0;
+h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+}
+
+p {
+    font-size: 18px;
+}
+
+footer {
+    background-color: #DEEBE7;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.input-wrapper {
+    margin: 0;
+    height: 40px;
     position: relative;
-    top: 1px;
+}
+
+/*
+ Sections
+   _____ ______ _____ _______ _____ ____  _   _  _____
+  / ____|  ____/ ____|__   __|_   _/ __ \| \ | |/ ____|
+ | (___ | |__ | |       | |    | || |  | |  \| | (___
+  \___ \|  __|| |       | |    | || |  | | . ` |\___ \
+  ____) | |___| |____   | |   _| || |__| | |\  |____) |
+ |_____/|______\_____|  |_|  |_____\____/|_| \_|_____/
+*/
+
+.hero {
+    background-color: #E9F2EF;
+    height: 900px;
+    padding-top: 30px;
+}
+
+#features {
+    background-color: #EFF7F4;
+    height: 650px;
+}
+
+.landing-footer {
+    padding-top: 40px;
+    height: 250px;
+}
+
+/*
+ Text
+  _______ ________   _________
+ |__   __|  ____\ \ / /__   __|
+    | |  | |__   \ V /   | |
+    | |  |  __|   > <    | |
+    | |  | |____ / . \   | |
+    |_|  |______/_/ \_\  |_|
+*/
+
+#hero-tagline {
+    margin-bottom: 90px;
+}
+
+#hero-tagline h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+    font-size: 80px;
+    margin: -8px;
+    color: #2C3E50;
+}
+
+#agree-terms {
+    margin-top: 15px;
 }
 
 #sign-up-form a {
@@ -135,37 +164,11 @@ label {
     text-decoration: none;
 }
 
-a:hover {
-    cursor: pointer;
-}
-
-.image-chat-box {
-    height: 385px;
-}
-
-#features {
-    background-color: #EFF7F4;
-    height: 650px;
-}
-
-#features > .container > .row > .four > img {
-    margin-top: 90px;
-    width: 250px;
-}
-
-h4 {
-    font-family: 'Lato', sans-serif;
-    font-weight: Bold;
-}
-
 #features > .container > .row > .four > h4 {
     margin-top: -20px;
     color: #3ECF8E;
 }
 
-p {
-    font-size: 18px;
-}
 #features > .container > .row > .four > p {
     padding-left: 30px;
     padding-right: 30px;
@@ -176,22 +179,10 @@ p {
     line-height: 22px;
 }
 
-footer {
-    height: 250px;
-    background-color: #DEEBE7;
-}
-
-h5 {
-    font-size: 20px;
-}
-
 .landing-footer h5 {
     font-family: 'Lato', sans-serif;
     font-weight: Bold;
-}
-
-.landing-footer {
-    padding-top: 40px;
+    margin-bottom: 0;
 }
 
 .landing-footer a, .landing-footer p {
@@ -202,6 +193,32 @@ h5 {
 
 .landing-footer p {
     margin-bottom: 2px;
+}
+
+/*
+ Images
+  _____ __  __          _____ ______  _____
+ |_   _|  \/  |   /\   / ____|  ____|/ ____|
+   | | | \  / |  /  \ | |  __| |__  | (___
+   | | | |\/| | / /\ \| | |_ |  __|  \___ \
+  _| |_| |  | |/ ____ \ |__| | |____ ____) |
+ |_____|_|  |_/_/    \_\_____|______|_____/
+ */
+
+#image-header-unilingual-logo {
+    height: 65px;
+    margin-bottom: 35px;
+}
+
+.input-wrapper > img {
+    height: 19px;
+    position: absolute;
+    left: 11px;
+    top: 14px;
+}
+
+.image-chat-box {
+    height: 385px;
 }
 
 #image-smartphone-icon {
@@ -224,10 +241,73 @@ h5 {
     height: 15px;
 }
 
+#features > .container > .row > .four > img {
+    margin-top: 90px;
+    width: 250px;
+}
+
+/*
+ Buttons
+  ____  _    _ _______ _______ ____  _   _  _____
+ |  _ \| |  | |__   __|__   __/ __ \| \ | |/ ____|
+ | |_) | |  | |  | |     | | | |  | |  \| | (___
+ |  _ <| |  | |  | |     | | | |  | | . ` |\___ \
+ | |_) | |__| |  | |     | | | |__| | |\  |____) |
+ |____/ \____/   |_|     |_|  \____/|_| \_|_____/
+ */
+
+#sign-up-button-green-large {
+    margin-top: 10px;
+    border-radius: 0px;
+    height: 50px;
+    border: none;
+    background-color: #3ECF8E;
+    color: White;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 17px;
+    font-weight: 400;
+    text-transform: none;
+    transition: 0.2s;
+}
+
+#sign-up-button-green-large:hover {
+    background-color: #52CF9E;
+}
+
+#agree-terms input[type="checkbox"] {
+    margin-left: 0;
+    position: relative;
+    top: 1px;
+}
+
+/*
+ General Positioning
+   _____ ______ _   _ ______ _____            _        _____   ____   _____ _____ _______ _____ ____  _   _ _____ _   _  _____
+  / ____|  ____| \ | |  ____|  __ \     /\   | |      |  __ \ / __ \ / ____|_   _|__   __|_   _/ __ \| \ | |_   _| \ | |/ ____|
+ | |  __| |__  |  \| | |__  | |__) |   /  \  | |      | |__) | |  | | (___   | |    | |    | || |  | |  \| | | | |  \| | |  __
+ | | |_ |  __| | . ` |  __| |  _  /   / /\ \ | |      |  ___/| |  | |\___ \  | |    | |    | || |  | | . ` | | | | . ` | | |_ |
+ | |__| | |____| |\  | |____| | \ \  / ____ \| |____  | |    | |__| |____) |_| |_   | |   _| || |__| | |\  |_| |_| |\  | |__| |
+  \_____|______|_| \_|______|_|  \_\/_/    \_\______| |_|     \____/|_____/|_____|  |_|  |_____\____/|_| \_|_____|_| \_|\_____|
+*/
+.landing-footer .eight > .row > .three, .landing-footer > .eight > .row > .six {
+    margin-bottom: 15px;
+}
+
+
+/*
+ Media Queries
+  __  __ ______ _____ _____             ____  _    _ ______ _____  _____ ______  _____
+ |  \/  |  ____|  __ \_   _|   /\      / __ \| |  | |  ____|  __ \|_   _|  ____|/ ____|
+ | \  / | |__  | |  | || |    /  \    | |  | | |  | | |__  | |__) | | | | |__  | (___
+ | |\/| |  __| | |  | || |   / /\ \   | |  | | |  | |  __| |  _  /  | | |  __|  \___ \
+ | |  | | |____| |__| || |_ / ____ \  | |__| | |__| | |____| | \ \ _| |_| |____ ____) |
+ |_|  |_|______|_____/_____/_/    \_\  \___\_\\____/|______|_|  \_\_____|______|_____/
+ */
+
 /* Mobile first queries */
 @media (min-width: 200px) {
     .hero {
-        height: 2000px;
+        height: 1400px;
     }
 
     #hero-tagline h1 {
@@ -240,14 +320,31 @@ h5 {
     }
 
     #features {
-        height: 1850px;
+        height: 1550px;
+    }
+
+    .landing-footer {
+        height: 525px;
+    }
+
+    .image-chat-box {
+        height: 320px;
+    }
+
+    #features > .container > .row > .four > img {
+        margin-top: 90px;
+        width: 150px;
+    }
+
+    #header-unilingual-logo {
+        height: 50px;
     }
 }
 
 /* Larger than mobile */
 @media (min-width: 400px) {
     .hero {
-        height: 2000px;
+        height: 1600px;
     }
 
     #hero-tagline h1 {
@@ -260,7 +357,24 @@ h5 {
     }
 
     #features {
-        height: 1550px;
+        height: 1450px;
+    }
+
+    .landing-footer {
+        height: 500px;
+    }
+
+    .image-chat-box {
+        height: 385px;
+    }
+
+    #features > .container > .row > .four > img {
+        margin-top: 90px;
+        width: 220px;
+    }
+
+    #header-unilingual-logo {
+        height: 65px;
     }
 }
 
@@ -282,6 +396,25 @@ h5 {
     #features {
         height: 850px;
     }
+
+    .landing-footer {
+        height: 250px;
+    }
+
+    .image-chat-box {
+        position: relative;
+        top: 60px;
+        height: 190px;
+    }
+
+    #features > .container > .row > .four > img {
+        margin-top: 90px;
+        width: 170px;
+    }
+
+    #header-unilingual-logo {
+        height: 65px;
+    }
 }
 
 /* Larger than tablet */
@@ -301,6 +434,22 @@ h5 {
 
     #features {
         height: 750px;
+    }
+
+    .landing-footer {
+        height: 250px;
+    }
+
+    .image-chat-box {
+        height: 260px;
+    }
+    #features > .container > .row > .four > img {
+         margin-top: 90px;
+         width: 220px;
+    }
+
+    #header-unilingual-logo {
+        height: 65px;
     }
 }
 
@@ -322,6 +471,23 @@ h5 {
     #features {
         height: 650px;
     }
+
+    .landing-footer {
+        height: 250px;
+    }
+
+    .image-chat-box {
+        height: 325px;
+    }
+
+    #features > .container > .row > .four > img {
+        margin-top: 90px;
+        width: 250px;
+    }
+
+    #header-unilingual-logo {
+        height: 65px;
+    }
 }
 
 /* Larger than Desktop HD */
@@ -341,6 +507,23 @@ h5 {
 
     #features {
         height: 650px;
+    }
+
+    .landing-footer {
+        height: 250px;
+    }
+
+    .image-chat-box {
+        height: 385px;
+    }
+
+    #features > .container > .row > .four > img {
+        margin-top: 90px;
+        width: 250px;
+    }
+
+    #header-unilingual-logo {
+        height: 65px;
     }
 }
 
