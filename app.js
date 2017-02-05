@@ -1,17 +1,49 @@
-var express  = require("express"),
-        app  = express();
+var express       = require("express"),
+    app           = express(),
+    mongoose      = require("mongoose"),
+    passport      = require("passport"),
+    bodyParser    = require("body-parser"),
+    LocalStrategy = require("passport-local"),
+    User          = require("./models/user");
 
 // Port for server to listen on
 var port = 8080;
 
-// Use ejs
+mongoose.connect("mongodb://localhost/unilingual");
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-// Serve assets location
 app.use(express.static(__dirname + "/public"))
 
-// ROUTE: landing page
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "I love garlic bread it is so tasty I wish I could eat it for breakfast lunch and dinner",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// GET ROUTE: landing page
 app.get("/", function(req, res) {
     res.render("landing");
+});
+
+// POST ROUTE: register user
+app.post("/register", function(req, res) {
+    var newUser = new User({username : req.body.username, email: req.body.email});
+    User.register(newUser, req.body.password, function(error, user) {
+       if (error) {
+           conosle.log(error);
+           res.render("/");
+       }
+       passport.authenticate("local")(req, res, function() {
+          res.redirect("/");
+       });
+    });
 });
 
 // Listen on set port
