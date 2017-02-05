@@ -38,6 +38,10 @@ body {
     margin: 0;
 }
 
+.center {
+    text-align: center;
+}
+
 .hero {
     background-color: #E9F2EF;
     height: 900px;
@@ -50,7 +54,6 @@ body {
 }
 
 #hero-tagline {
-    margin-bottom: 90px;
     margin-bottom: 90px;
 }
 
@@ -134,9 +137,138 @@ a:hover {
 
 #chat-box-english {
     height: 385px;
-
 }
 
 #chat-box-french {
     height: 385px;
 }
+
+#features {
+    background-color: #EFF7F4;
+    height: 700px;
+}
+
+#features > .container > .row > .four > img {
+    margin-top: 90px;
+    width: 250px;
+}
+
+h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+}
+
+#features > .container > .row > .four > h4 {
+    margin-top: -20px;
+    color: #3ECF8E;
+}
+
+p {
+    font-size: 18px;
+}
+#features > .container > .row > .four > p {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+    color: #3ECF8E;
+    margin-top: -18px;
+    line-height: 22px;
+}
+
+/* Mobile first queries */
+@media (min-width: 200px) {
+    .hero {
+        height: 2000px;
+    }
+
+    #hero-tagline h1 {
+        font-size: 39px;
+        margin: 0;
+    }
+
+    #hero-tagline {
+        margin-bottom: 20px;
+    }
+}
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+    .hero {
+        height: 2000px;
+    }
+
+    #hero-tagline h1 {
+        font-size: 57px;
+        margin: 0;
+    }
+
+    #hero-tagline {
+        margin-bottom: 20px;
+    }
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+    .hero {
+        height: 1000px;
+    }
+
+    #hero-tagline h1 {
+        font-size: 80px;
+        margin: -8px;
+    }
+
+    #hero-tagline {
+        margin-bottom: 90px;
+    }
+}
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+    .hero {
+        height: 1000px;
+    }
+
+    #hero-tagline h1 {
+        font-size: 80px;
+        margin: -8px;
+    }
+
+    #hero-tagline {
+        margin-bottom: 90px;
+    }
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+    .hero {
+        height: 900px;
+    }
+
+    #hero-tagline h1 {
+        font-size: 80px;
+        margin: -8px;
+    }
+
+    #hero-tagline {
+        margin-bottom: 90px;
+    }
+}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {
+    .hero {
+        height: 900px;
+    }
+
+    #hero-tagline h1 {
+        font-size: 80px;
+        margin: -8px;
+    }
+
+    #hero-tagline {
+        margin-bottom: 90px;
+    }
+}
+
