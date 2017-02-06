@@ -1,7 +1,54 @@
 <% include partials/header %>
+<div class="log-in-popup-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="two-half column">
+                <div class="log-in-popup">
+                    <a href="#close-log-in-popup"><img src="/images/icons/dark-grey-x.png" id="image-log-in-popup-close"></a>
+                    <div class="row center">
+                        <h4>Log In</h4>
+                    </div>
+                    <form action="/login" method="POST" id="log-in-form">
+                        <div class="row">
+                            <label for="signUpEmailInput">Email</label>
+                            <div class="input-wrapper">
+                                <img src="/images/icons/mail.png">
+                                <input type="text" name="email" class="u-full-width" id="log-in-email-input">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="signUpPasswordInput">Password</label>
+                            <div class="input-wrapper">
+                                <img src="/images/icons/password.png">
+                                <input type="password" name="password" class="u-full-width" id="log-in-password-input">
+                            </div>
+                        </div>
+                        <label>
+                            <div class="row">
+                                <a class="">I forgot my password</a>
+                            </div>
+                        </label>
+                        <div class="row">
+                            <button class="button-green-large" class="u-full-width">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dark-overlay">
+    </div>
+</div>
 <section class="hero">
     <div class="container">
-        <img id="image-header-unilingual-logo" src="/images/unilingual-logo-text.png">
+        <div class="row">
+            <div class="ten columns">
+                <img id="image-header-unilingual-logo" src="/images/unilingual-logo-text.png">
+            </div>
+            <div class="two columns">
+                <a id="log-in-button" href="#">Log In</a>
+            </div>
+        </div>
         <div id="hero-tagline">
             <h1>Speak one language.</h1>
             <h1>Communicate in another.</h1>
@@ -13,21 +60,21 @@
                         <label for="signUpUsernameInput">Username</label>
                         <div class="input-wrapper">
                             <img src="/images/icons/user.png">
-                            <input type="text" name="username" class="u-full-width" id="signUpUsernameInput">
+                            <input type="text" name="username" class="u-full-width" id="sign-up-username-input">
                         </div>
                     </div>
                     <div class="row">
                         <label for="signUpEmailInput">Email</label>
                         <div class="input-wrapper">
                             <img src="/images/icons/mail.png">
-                            <input type="text" name="email" class="u-full-width" id="signUpEmailInput">
+                            <input type="text" name="email" class="u-full-width" id="sign-up-email-input">
                         </div>
                     </div>
                     <div class="row">
                         <label for="signUpPasswordInput">Password</label>
                         <div class="input-wrapper">
                             <img src="/images/icons/password.png">
-                            <input type="password" name="password" class="u-full-width" id="signUpPasswordInput">
+                            <input type="password" name="password" class="u-full-width" id="sign-up-password-input">
                         </div>
                     </div>
                     <label id="agree-terms">
@@ -37,7 +84,7 @@
                         </div>
                     </label>
                     <div class="row">
-                        <button id="sign-up-button-green-large" class="u-full-width">Sign Up</button>
+                        <button class="button-green-large" class="u-full-width">Sign Up</button>
                     </div>
                 </form>
             </div>

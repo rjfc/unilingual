@@ -37,7 +37,7 @@ app.post("/register", function(req, res) {
     var newUser = new User({username : req.body.username, email: req.body.email});
     User.register(newUser, req.body.password, function(error, user) {
        if (error) {
-           conosle.log(error);
+           console.log(error);
            res.render("/");
        }
        passport.authenticate("local")(req, res, function() {
@@ -45,6 +45,15 @@ app.post("/register", function(req, res) {
        });
     });
 });
+
+// POST ROUTE: login user
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/",
+        failureRedirect: "/"
+    }), function(req, res) {
+});
+
 
 // Listen on set port
 app.listen(port, function() {

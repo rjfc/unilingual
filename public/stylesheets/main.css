@@ -22,7 +22,7 @@ Colours
 
 /*
 Fonts
-______ ____  _   _ _______ _____
+ ______ ____  _   _ _______ _____
 |  ____/ __ \| \ | |__   __/ ____|
 | |__ | |  | |  \| |  | | | (___
 |  __|| |  | | . ` |  | |  \___ \
@@ -127,6 +127,36 @@ h5 {
     height: 250px;
 }
 
+.dark-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: Black;
+    opacity: 0.5;
+    z-index: 9;
+}
+
+.log-in-popup-wrapper {
+    position: fixed;
+    z-index: 10;
+    display: none;
+}
+
+.log-in-popup {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 120px;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 16em;
+    width: 20%;
+    z-index: 10;
+    background-color: #CBDAD5;
+    border-radius: 6px;
+    padding: 20px 20px 0 20px;
+}
+
 /*
  Text
   _______ ________   _________
@@ -139,6 +169,7 @@ h5 {
 
 #hero-tagline {
     margin-bottom: 90px;
+    margin-top: 20px;
 }
 
 #hero-tagline h1 {
@@ -195,6 +226,19 @@ h5 {
     margin-bottom: 2px;
 }
 
+.log-in-popup h4 {
+    margin-bottom: 0;
+}
+
+.log-in-popup label {
+    margin-top: 14px;
+}
+
+.log-in-popup label > .row > a {
+    font-weight: Bold;
+    color: #35B67C;
+}
+
 /*
  Images
   _____ __  __          _____ ______  _____
@@ -219,6 +263,8 @@ h5 {
 
 .image-chat-box {
     height: 385px;
+    position: relative;
+    top: 0;
 }
 
 #image-smartphone-icon {
@@ -246,6 +292,10 @@ h5 {
     width: 250px;
 }
 
+#image-log-in-popup-close {
+    height: 13px;
+    float: right;
+}
 /*
  Buttons
   ____  _    _ _______ _______ ____  _   _  _____
@@ -256,7 +306,7 @@ h5 {
  |____/ \____/   |_|     |_|  \____/|_| \_|_____/
  */
 
-#sign-up-button-green-large {
+.button-green-large {
     margin-top: 10px;
     border-radius: 0px;
     height: 50px;
@@ -270,7 +320,8 @@ h5 {
     transition: 0.2s;
 }
 
-#sign-up-button-green-large:hover {
+.button-green-large:hover {
+    color: White;
     background-color: #52CF9E;
 }
 
@@ -278,6 +329,17 @@ h5 {
     margin-left: 0;
     position: relative;
     top: 1px;
+}
+
+#log-in-button {
+    position: relative;
+    top: 15px;
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+    color: #35B67C;
+    text-decoration: none;
+    font-size: 17px;
+    margin-bottom: 15px !important;
 }
 
 /*
@@ -336,8 +398,8 @@ h5 {
         width: 150px;
     }
 
-    #header-unilingual-logo {
-        height: 50px;
+    #image-header-unilingual-logo {
+        height: 40px;
     }
 }
 
@@ -373,7 +435,7 @@ h5 {
         width: 220px;
     }
 
-    #header-unilingual-logo {
+    #image-header-unilingual-logo {
         height: 65px;
     }
 }
@@ -412,7 +474,7 @@ h5 {
         width: 170px;
     }
 
-    #header-unilingual-logo {
+    #image-header-unilingual-logo {
         height: 65px;
     }
 }
@@ -441,6 +503,8 @@ h5 {
     }
 
     .image-chat-box {
+        position: relative;
+        top: 0;
         height: 260px;
     }
     #features > .container > .row > .four > img {
@@ -448,7 +512,7 @@ h5 {
          width: 220px;
     }
 
-    #header-unilingual-logo {
+    #image-header-unilingual-logo {
         height: 65px;
     }
 }
@@ -478,6 +542,8 @@ h5 {
 
     .image-chat-box {
         height: 325px;
+        position: relative;
+        top: 0;
     }
 
     #features > .container > .row > .four > img {
@@ -485,7 +551,7 @@ h5 {
         width: 250px;
     }
 
-    #header-unilingual-logo {
+    #image-header-unilingual-logo {
         height: 65px;
     }
 }
@@ -515,6 +581,8 @@ h5 {
 
     .image-chat-box {
         height: 385px;
+        position: relative;
+        top: 0;
     }
 
     #features > .container > .row > .four > img {
@@ -522,7 +590,7 @@ h5 {
         width: 250px;
     }
 
-    #header-unilingual-logo {
+    #image-header-unilingual-logo {
         height: 65px;
     }
 }
