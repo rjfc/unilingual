@@ -38,7 +38,7 @@ app.post("/register", function(req, res) {
     User.register(newUser, req.body.password, function(error, user) {
        if (error) {
            console.log(error);
-           res.render("/");
+           res.render("landing");
        }
        passport.authenticate("local")(req, res, function() {
           res.redirect("/");
@@ -49,9 +49,14 @@ app.post("/register", function(req, res) {
 // POST ROUTE: login user
 app.post("/login", passport.authenticate("local",
     {
-        successRedirect: "/",
+        successRedirect: "/talk",
         failureRedirect: "/"
     }), function(req, res) {
+});
+
+// GET ROUTE: talk page
+app.get("/talk", function(req, res) {
+    res.render("talk");
 });
 
 
