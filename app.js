@@ -43,11 +43,21 @@ passport.use('login', new LocalStrategy({
                 return done(null, false,
                     req.flash('message', 'User Not found.'));
             }
-            // User exists but wrong password, log the error
+            /*// User exists but wrong password, log the error
             if (!user.validPassword(password)){
                 console.log('Invalid Password');
-                return done(null, false,
-                    req.flash('message', 'Invalid Password'));
+                return done( null, false, req.flash('message', 'Invalid Password') );
+            }
+            // User and password both match, return user from
+            // done method which will be treated like success
+            return done(null, user);*/
+            if ( user && user.comparePassword( password ) ) {
+                // user found, password is correct. do what you want to do
+                return done(null, user);
+            } else {
+                // user not found or wrong password.
+                console.log('Invalid Password');
+                return done( null, false, req.flash('message', 'Invalid Password') );
             }
             // User and password both match, return user from
             // done method which will be treated like success
