@@ -7,6 +7,7 @@
                     <a href="#close-log-in-popup"><img src="/images/icons/dark-grey-x.png" id="image-log-in-popup-close"></a>
                     <div class="row center">
                         <h4>Log In</h4>
+
                     </div>
                     <form action="/login" method="POST" id="log-in-form">
                         <div class="row">
@@ -47,11 +48,6 @@
             </div>
             <div class="two columns">
                 <a id="log-in-button" href="#">Log In</a>
-                <% if (error){ %>
-
-                <div><%= error %></div>
-
-                <% } %>
             </div>
         </div>
         <div id="hero-tagline">
@@ -82,12 +78,19 @@
                             <input type="password" name="password" class="u-full-width" id="sign-up-password-input">
                         </div>
                     </div>
-                    <label id="agree-terms">
+                    <label class="form-label">
                         <div class="row">
                             <input type="checkbox">
                             <span class="label-body">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
                         </div>
                     </label>
+                    <% if (error){ %>
+                        <label class="form-label" id="form-error">
+                            <span class="label-body">
+                                <%= error %>
+                            </span>
+                        </label>
+                    <% } %>
                     <div class="row">
                         <button class="button-green-large" class="u-full-width">Sign Up</button>
                     </div>

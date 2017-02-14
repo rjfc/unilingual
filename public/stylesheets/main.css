@@ -180,7 +180,7 @@ h5 {
     color: #2C3E50;
 }
 
-#agree-terms {
+.form-label {
     margin-top: 15px;
 }
 
@@ -237,6 +237,10 @@ h5 {
 .log-in-popup label > .row > a {
     font-weight: Bold;
     color: #35B67C;
+}
+
+#form-error {
+    margin: 0;
 }
 
 /*
@@ -325,7 +329,7 @@ h5 {
     background-color: #52CF9E;
 }
 
-#agree-terms input[type="checkbox"] {
+.form-label input[type="checkbox"] {
     margin-left: 0;
     position: relative;
     top: 1px;
