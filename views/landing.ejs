@@ -47,6 +47,11 @@
             </div>
             <div class="two columns">
                 <a id="log-in-button" href="#">Log In</a>
+                <% if (error){ %>
+
+                <div><%= error %></div>
+
+                <% } %>
             </div>
         </div>
         <div id="hero-tagline">
