@@ -32,7 +32,7 @@ passport.deserializeUser(function(id, done) {
 });
 app.use(function(req,res,next) {
     res.locals.loginError = req.flash("loginError");
-    res.locals.signupError = req.flash("signupError");
+    res.locals.registerError = req.flash("registerError");
     next();
 });
 // Passport login LocalStrategy
@@ -74,7 +74,7 @@ passport.use("login", new LocalStrategy({
     );
 }));
 
-passport.use("signup", new LocalStrategy({
+passport.use("register", new LocalStrategy({
         passReqToCallback : true
     },
     function(req, username, password, done) {
@@ -90,7 +90,7 @@ passport.use("signup", new LocalStrategy({
                 if (user) {
                     console.log("USER_SIGN_UP_ERROR: USER '" + username + "' ALREADY EXISTS");
                     return done(null, false,
-                        req.flash("signupError", "A user with the username provided already exists."));
+                        req.flash("registerError", "A user with the username provided already exists."));
                 } else {
                     // if there is no user with that email
                     // create the user
@@ -122,7 +122,7 @@ app.get("/", function(req, res) {
 });
 
 // POST ROUTE: register user
-app.post('/register', passport.authenticate('signup', {
+app.post('/register', passport.authenticate('register', {
     successRedirect: '/',
     failureRedirect: '/',
     failureFlash : true
