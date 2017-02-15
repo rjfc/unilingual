@@ -158,6 +158,13 @@ h5 {
     padding: 20px 20px 0 20px;
 }
 
+#talk-container {
+    width: 100%;
+    max-width: 100%;
+    clear: both;
+    margin: 0 auto;
+}
+
 /*
  Text
   _______ ________   _________

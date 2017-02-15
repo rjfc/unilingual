@@ -31,6 +31,7 @@ passport.deserializeUser(function(id, done) {
 
 });
 app.use(function(req,res,next) {
+    res.locals.currentUser = req.user;
     res.locals.loginError = req.flash("loginError");
     res.locals.registerError = req.flash("registerError");
     next();
@@ -123,14 +124,14 @@ app.get("/", function(req, res) {
 
 // POST ROUTE: register user
 app.post('/register', passport.authenticate('register', {
-    successRedirect: '/',
+    successRedirect: '/talk',
     failureRedirect: '/',
     failureFlash : true
 }));
 
 // POST ROUTE: login user
 app.post('/login', passport.authenticate('login', {
-    successRedirect: '/',
+    successRedirect: '/talk',
     failureRedirect: '/',
     failureFlash : true
 }));
