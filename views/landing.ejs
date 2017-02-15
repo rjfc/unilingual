@@ -29,8 +29,14 @@
                                 <a class="">I forgot my password</a>
                             </div>
                         </label>
+
+                        <span id="log-in-error">
+                            <% if (loginError){ %>
+                                <%= loginError %>
+                            <% } %>
+                        </span>
                         <div class="row">
-                            <button class="button-green-large" class="u-full-width">Log In</button>
+                            <button class="button-green-large" class="u-full-width" id="log-in-submit">Log In</button>
                         </div>
                     </form>
                 </div>
@@ -84,13 +90,11 @@
                             <span class="label-body">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
                         </div>
                     </label>
-                    <% if (error){ %>
-                        <label class="form-label" id="form-error">
-                            <span class="label-body">
-                                <%= error %>
-                            </span>
-                        </label>
-                    <% } %>
+                    <span id="sign-up-error">
+                        <% if (signupError){ %>
+                            <%= signupError %>
+                        <% } %>
+                    </span>
                     <div class="row">
                         <button class="button-green-large" class="u-full-width">Sign Up</button>
                     </div>

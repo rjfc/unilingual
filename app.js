@@ -1,12 +1,12 @@
-var express        = require("express"),
-    app            = express(),
-    flash          = require("connect-flash"),
-    mongoose       = require("mongoose"),
-    passport       = require("passport"),
-    bodyParser     = require("body-parser"),
-    expressSession = require("express-session"),
-    LocalStrategy  = require("passport-local").Strategy,
-    User           = require("./models/user");
+var express          = require("express"),
+    app              = express(),
+    flash            = require("connect-flash"),
+    mongoose         = require("mongoose"),
+    passport         = require("passport"),
+    bodyParser       = require("body-parser"),
+    expressSession   = require("express-session"),
+    LocalStrategy    = require("passport-local").Strategy,
+    User             = require("./models/user");
 // Port for server to listen on
 var port = 8080;
 
@@ -31,7 +31,8 @@ passport.deserializeUser(function(id, done) {
 
 });
 app.use(function(req,res,next) {
-    res.locals.error = req.flash("error");
+    res.locals.loginError = req.flash("loginError");
+    res.locals.signupError = req.flash("signupError");
     next();
 });
 // Passport login LocalStrategy
@@ -40,15 +41,15 @@ passport.use("login", new LocalStrategy({
 }, function(req, username, password, done) {
     // check in mongo if a user with username exists or not
     User.findOne({"username" : username },
-        function(err, user) {
+        function(error, user) {
             // In case of any error, return using the done method
-            if (err)
-                return done(err);
+            if (error)
+                return done(error);
             // Username does not exist, log error & redirect back
             if (!user){
-                console.log("User Not Found with username " + username);
+                console.log("USER_LOG_IN_ERROR: USERNAME '" + username + "' DOES NOT EXIST");
                 return done(null, false,
-                    req.flash("error", "User Not found."));
+                    req.flash("loginError", "A user could not be found with the username provided."));
             }
             /*// User exists but wrong password, log the error
             if (!user.validPassword(password)){
@@ -58,13 +59,13 @@ passport.use("login", new LocalStrategy({
             // User and password both match, return user from
             // done method which will be treated like success
             return done(null, user);*/
-            if ( user && user.comparePassword( password ) ) {
+            if (user && user.comparePassword(password)) {
                 // user found, password is correct. do what you want to do
                 return done(null, user);
             } else {
                 // user not found or wrong password.
-                console.log("Invalid Password");
-                return done( null, false, req.flash("error", "Invalid Password"));
+                console.log("USER_LOG_IN_ERROR: '" + username + "' ENTERED INVALID PASSWORD");
+                return done( null, false, req.flash("loginError", "The password is invalid."));
             }
             // User and password both match, return user from
             // done method which will be treated like success
@@ -79,17 +80,17 @@ passport.use("signup", new LocalStrategy({
     function(req, username, password, done) {
         findOrCreateUser = function(){
             // find a user in Mongo with provided username
-            User.findOne({"username" : username},function(err, user) {
+            User.findOne({"username" : username},function(error, user) {
                 // In case of any error return
-                if (err){
-                    console.log("Error in SignUp: " + err);
-                    return done(err);
+                if (error){
+                    console.log("USER_SIGN_UP_ERROR: " + error);
+                    return done(error);
                 }
                 // already exists
                 if (user) {
-                    console.log("User already exists");
+                    console.log("USER_SIGN_UP_ERROR: USER '" + username + "' ALREADY EXISTS");
                     return done(null, false,
-                        req.flash("error", "User Already Exists"));
+                        req.flash("signupError", "A user with the username provided already exists."));
                 } else {
                     // if there is no user with that email
                     // create the user
@@ -101,10 +102,10 @@ passport.use("signup", new LocalStrategy({
                     // save the user
                     newUser.save(function(err) {
                         if (err){
-                            console.log("Error in Saving user: " + err);
+                            console.log("USER_SIGN_UP_ERROR: COULD NOT SAVE USER - " + err);
                             throw err;
                         }
-                        console.log("User registration successful");
+                        console.log("USER_SIGN_UP_SUCCESS: NEW USER '" + username + "'");
                         return done(null, newUser);
                     });
                 }

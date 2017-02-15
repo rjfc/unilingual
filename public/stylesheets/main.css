@@ -18,6 +18,7 @@ Colours
   Shamrock         | Green    | #3ECF8E
   Jungle Green     | Green    | #35B67C
   Pickled Bluewood | Blue     | #2C3E50
+  Error Red        | Red      | #EE372E
 */
 
 /*
@@ -239,8 +240,18 @@ h5 {
     color: #35B67C;
 }
 
-#form-error {
+#sign-up-error {
     margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #EE372E;
+    font-weight: Bold;
+}
+
+#log-in-error {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: #EE372E;
+    font-weight: Bold;
 }
 
 /*
