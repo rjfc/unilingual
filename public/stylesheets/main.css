@@ -8,6 +8,7 @@ Colours
  \_____\____/|______\____/ \____/|_|  \_\_____/
   Colour           |   Type   |  Hex
  ------------------|----------|-------
+  Silver Chalice   | Neutral  | #A7A7A7
   Alabaster        | Neutral  | #F8F8F8
   Alto             | Neutral  | #DEDEDE
   Dusty Gray       | Neutral  | #9B9B9B
@@ -118,7 +119,9 @@ footer {
     top: 50px;
 }
 
-#friend-status {
+.friend-status {
+    position: relative;
+    bottom: 50px;
     height: 10px;
     width: 10px;
 }
@@ -128,6 +131,15 @@ footer {
     text-decoration: none;
 }
 
+
+.chat-friend-status {
+    position: relative;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    top: 45px;
+    background-color: #98df6d;
+}
 /*
  Sections
    _____ ______ _____ _______ _____ ____  _   _  _____
@@ -197,9 +209,17 @@ footer {
 }
 
 #friends-div {
-    height: 92vh;
+    height: 90vh;
     background-color: #F8F8F8;
-    border: 1px solid #DEDEDE;
+    border: 1px solid #A7A7A7;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+}
+
+#chat-div {
+    height: 90vh;
+    background-color: #F8F8F8;
+    border: 1px solid #A7A7A7;
     border-radius: 7px;
     padding: 10px 20px 10px 20px;
 }
@@ -207,12 +227,40 @@ footer {
 #options-bar-div {
     height: 35px;
     background-color: #F8F8F8;
-    border: 1px solid #DEDEDE;
+    border: 1px solid #A7A7A7;
     border-radius: 7px;
     position: relative;
     bottom: 18px;
     padding-left: 18px;
     padding-top: 12px;
+}
+
+.chat-history-div {
+    position: relative;
+    height: 67.5%;
+    background-color: #F8F8F8;
+    border: 1px solid #A7A7A7;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+    bottom: 75px;
+}
+
+.chat-message-div {
+    font-family: 'Lato', sans-serif;
+    font-size: 110%;
+    position: relative;
+    background-color: #F8F8F8;
+    border: 1px solid #A7A7A7;
+    border-radius: 7px;
+    padding: 10px 20px 10px 20px;
+    width: 100%;
+    height: 100px !important;
+    bottom: 56px;
+
+}
+
+.chat-message-div:focus {
+    border: 1px solid #52CF9E;
 }
 
 /*
@@ -350,10 +398,10 @@ h5 {
     color: #52CF9E;
     text-decoration: none;
     left: 125px;
-    bottom: 122px;
+    bottom: 105px;
 }
 
-#friend-name {
+.friend-name {
     font-family: 'Lato', sans-serif;
     font-weight: Bold;
     position: relative;
@@ -362,12 +410,19 @@ h5 {
     color: Black;
 }
 
-#friend-language {
+.friend-language {
     font-family: 'Lato', sans-serif;
     color: Black;
     position: relative;
     bottom: 124px;
     left: 102px;
+}
+
+.chat-friend-name {
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    left: 160px;
+    bottom: 94px;
 }
 
 /*
@@ -444,18 +499,27 @@ h5 {
 #image-add-user {
     position: relative;
     height: 34px;
-    left: 275px;
+    float: right;
     bottom: 98px;
 }
 
-#friend-profile-picture {
+.friend-profile-picture {
     height: 65px;
     border-radius: 10px;
     position: relative;
     left: 20px;
     bottom: 35px;
+    margin-top: -130px;
 }
 
+.chat-friend-profile-picture {
+    height: 100px;
+    border-radius: 10px;
+    position: relative;
+    left: 35px;
+    bottom: 9px;
+
+}
 
 /*
  Buttons
