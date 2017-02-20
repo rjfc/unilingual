@@ -49,11 +49,18 @@ font-family: 'Lato', sans-serif;
  | |__| | |____| |\  | |____| | \ \  / ____ \| |____
   \_____|______|_| \_|______|_|  \_\/_/    \_\______|
  */
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
 body {
     margin: 0;
     background-color: #E9F2EF;
-    padding-left: 30px;
-    padding-right: 30px;
 }
 
 input[name="username"], input[name="email"], input[name="password"] {
@@ -206,6 +213,7 @@ footer {
 .talk-wrapper {
     width: 100%;
     height: 100%;
+
 }
 
 #friends-div {
@@ -242,10 +250,10 @@ footer {
     border: 1px solid #A7A7A7;
     border-radius: 7px;
     padding: 10px 20px 10px 20px;
-    bottom: 75px;
+    bottom: 160px;
 }
 
-.chat-message-div {
+.chat-message-textarea {
     font-family: 'Lato', sans-serif;
     font-size: 110%;
     position: relative;
@@ -255,11 +263,12 @@ footer {
     padding: 10px 20px 10px 20px;
     width: 100%;
     height: 100px !important;
-    bottom: 56px;
+    bottom: 143px;
+    resize: none;
 
 }
 
-.chat-message-div:focus {
+.chat-message-textarea:focus {
     border: 1px solid #52CF9E;
 }
 
@@ -519,6 +528,13 @@ h5 {
     left: 35px;
     bottom: 9px;
 
+}
+
+.image-chat-call {
+    height: 80px;
+    position: relative;
+    left: 1176px;
+    bottom: 180px;
 }
 
 /*
