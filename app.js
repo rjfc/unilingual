@@ -141,6 +141,15 @@ app.get("/talk", isLoggedIn, function(req, res) {
     res.render("talk");
 });
 
+// POST ROUTE: Search for users to add
+app.post('/searchGlobalFriends', function(req,res){
+    var regex = new RegExp(req.body.friendSearch, 'i');  // 'i' makes it case insensitive
+    console.log(req.body.friendSearch);
+    return User.find({text: regex}, function(err, q){
+        return res.send(q);
+    });
+});
+
 // Middleware to check if user is logged in
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {

@@ -270,6 +270,12 @@ footer {
     border: 1px solid #52CF9E;
 }
 
+.add-friend-popup-wrapper {
+    position: fixed;
+    z-index: 10;
+    display: none;
+}
+
 /*
  Text
   _______ ________   _________
@@ -485,7 +491,7 @@ h5 {
     width: 250px;
 }
 
-#image-log-in-popup-close {
+.image-popup-close {
     height: 13px;
     float: right;
 }

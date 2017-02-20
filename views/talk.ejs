@@ -1,5 +1,30 @@
 <% include partials/header %>
 <div class="talk-wrapper">
+    <div class="add-friend-popup-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="two-half column">
+                    <div class="log-in-popup">
+                        <a href="#close-add-friend-popup"><img src="/images/icons/dark-grey-x.png" class="image-popup-close"></a>
+                        <div class="row center">
+                            <h4>Add Friend</h4>
+                        </div>
+                        <br>
+                        <form action="/searchGlobalFriends" method="POST" >
+                            <div class="row">
+                                <input type="text" name="friendSearch" class="u-full-width" placeholder="Search" id="add-friend-search-input">
+                            </div>
+                            <div class="row">
+                                <button class="button-green-large" class="u-full-width" id="add-friend-search-submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dark-overlay">
+        </div>
+    </div>
     <div class="container" id="talk-container">
         <div class="row">
             <div class="twelve columns">
@@ -25,10 +50,10 @@
                         <div class="user-status" id="current-user-status"></div>
                         <a href="#"><img id="current-user-profile-picture" src="images/talk/blank-profile-picture.png"></a>
                         <%if (currentUser) { %>
-                        <h4 id="current-user-name"><%=currentUser.username%></h4>
-                        <a id="current-user-language" href="#"><em><%=currentUser.language%></em> v</a>
+                            <h4 id="current-user-name"><%=currentUser.username%></h4>
+                            <a id="current-user-language" href="#"><em><%=currentUser.language%></em> v</a>
                         <%}%>
-                        <a href="#"><img id="image-add-user" src="/images/icons/add-user.png"></a>
+                        <a id="add-friend-button" href="#"><img id="image-add-user" src="/images/icons/add-user.png"></a>
                         <br>
                         <br>
                         <hr style="margin: 0; position:relative; bottom: 90px;">
