@@ -1,7 +1,4 @@
 <% include partials/header %>
-<%if (currentUser) { %>
-<li><a href="#">Signed In As <%=currentUser.username%></a></li>
-<%}%>
 <div class="talk-wrapper">
     <div class="container" id="talk-container">
         <div class="row">
@@ -27,8 +24,10 @@
                     <div id="current-user-div">
                         <div class="user-status" id="current-user-status"></div>
                         <a href="#"><img id="current-user-profile-picture" src="images/talk/blank-profile-picture.png"></a>
-                        <h4 id="current-user-name">John Doe</h4>
-                        <a id="current-user-language" href="#"><em>English</em> v</a>
+                        <%if (currentUser) { %>
+                        <h4 id="current-user-name"><%=currentUser.username%></h4>
+                        <a id="current-user-language" href="#"><em><%=currentUser.language%></em> v</a>
+                        <%}%>
                         <a href="#"><img id="image-add-user" src="/images/icons/add-user.png"></a>
                         <br>
                         <br>

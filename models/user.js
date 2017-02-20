@@ -11,7 +11,7 @@ UserSchema = new mongoose.Schema({
     username: String,
     email:  String,
     password: String,
-    language: String,
+    language: { type: String, default: "English" },
     profilePicture: { data: Buffer, contentType: String },
     friends: [this]
 });

@@ -99,7 +99,7 @@ passport.use("register", new LocalStrategy({
                     // set the user's local credentials
                     newUser.username = username;
                     newUser.password = password;
-                    newUser.email = req.param("email");
+                    newUser.email = req.params.email;
                     // save the user
                     newUser.save(function(err) {
                         if (err){
@@ -137,9 +137,17 @@ app.post('/login', passport.authenticate('login', {
 }));
 
 // GET ROUTE: talk page
-app.get("/talk", function(req, res) {
+app.get("/talk", isLoggedIn, function(req, res) {
     res.render("talk");
 });
+
+// Middleware to check if user is logged in
+function isLoggedIn(req, res, next){
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/");
+}
 
 
 // Listen on set port
