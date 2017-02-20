@@ -97,10 +97,11 @@ footer {
 
 .user-status {
     border-radius: 50%;
-    height: 15px;
-    width: 15px;
+    height: 13px;
+    width: 13px;
     background-color: #98df6d;
 }
+
 
 /*
  Divs
@@ -114,8 +115,17 @@ footer {
 
 #current-user-status {
     position: relative;
-    left: 20px;
-    top: 20px;
+    top: 50px;
+}
+
+#friend-status {
+    height: 10px;
+    width: 10px;
+}
+
+.friend {
+    position: relative;
+    text-decoration: none;
 }
 
 /*
@@ -191,6 +201,7 @@ footer {
     background-color: #F8F8F8;
     border: 1px solid #DEDEDE;
     border-radius: 7px;
+    padding: 10px 20px 10px 20px;
 }
 
 #options-bar-div {
@@ -210,7 +221,7 @@ footer {
  |__   __|  ____\ \ / /__   __|
     | |  | |__   \ V /   | |
     | |  |  __|   > <    | |
-    | |  | |____ / . \   | |ew
+    | |  | |____ / . \   | |
     |_|  |______/_/ \_\  |_|
 */
 
@@ -318,12 +329,45 @@ h5 {
     font-weight: Bold;
     color: #52CF9E;
     position: relative;
-    left: 50px;
+    left: 30px;
     top: 7px;
 }
 
 .options-bar-text:hover {
     color: #52CF9E;
+}
+
+#current-user-name {
+    position: relative;
+    left: 125px;
+    bottom: 80px;
+    color: #35B67C;
+}
+
+#current-user-language {
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    color: #52CF9E;
+    text-decoration: none;
+    left: 125px;
+    bottom: 122px;
+}
+
+#friend-name {
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+    position: relative;
+    left: 102px;
+    bottom: 100px;
+    color: Black;
+}
+
+#friend-language {
+    font-family: 'Lato', sans-serif;
+    color: Black;
+    position: relative;
+    bottom: 124px;
+    left: 102px;
 }
 
 /*
@@ -390,6 +434,29 @@ h5 {
     top: 7px;
 }
 
+#current-user-profile-picture {
+    height: 85px;
+    border-radius: 10px;
+    position: relative;
+    left: 27px;
+}
+
+#image-add-user {
+    position: relative;
+    height: 34px;
+    left: 275px;
+    bottom: 98px;
+}
+
+#friend-profile-picture {
+    height: 65px;
+    border-radius: 10px;
+    position: relative;
+    left: 20px;
+    bottom: 35px;
+}
+
+
 /*
  Buttons
   ____  _    _ _______ _______ ____  _   _  _____
@@ -419,12 +486,6 @@ h5 {
     background-color: #52CF9E;
 }
 
-.form-label input[type="checkbox"] {
-    margin-left: 0;
-    position: relative;
-    top: 1px;
-}
-
 #log-in-button {
     position: relative;
     top: 15px;
@@ -434,6 +495,32 @@ h5 {
     text-decoration: none;
     font-size: 17px;
     margin-bottom: 15px !important;
+}
+
+
+/*
+ Forms
+  ______ ____  _____  __  __  _____
+ |  ____/ __ \|  __ \|  \/  |/ ____|
+ | |__ | |  | | |__) | \  / | (___
+ |  __|| |  | |  _  /| |\/| |\___ \
+ | |   | |__| | | \ \| |  | |____) |
+ |_|    \____/|_|  \_\_|  |_|_____/
+*/
+
+.form-label input[type="checkbox"] {
+    margin-left: 0;
+    position: relative;
+    top: 1px;
+}
+
+#input-search-friends-list {
+    position: relative;
+    background: none;
+    height: 30px;
+    bottom: 94px;
+    font-style: italic;
+    border: none;
 }
 
 /*
