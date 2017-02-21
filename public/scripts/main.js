@@ -51,7 +51,7 @@ else {
     $(".add-friend-popup-wrapper").hide();
 }
 
-// Show error when log in form fields are empty
+// Show error when log in form fields have error
 $("#log-in-form").submit(function(event) {
 
     if ($("#log-in-username-input").val().trim() == "") {
@@ -65,7 +65,7 @@ $("#log-in-form").submit(function(event) {
     localStorage.setItem("loginDiv", "closed");
 });
 
-// Show error when sign up form fields are empty
+// Show error when sign up form fields have error
 $("#sign-up-form").submit(function( event ) {
     if ($("#sign-up-username-input").val().trim() == "") {
         $("#sign-up-error").html("The username field is empty.");

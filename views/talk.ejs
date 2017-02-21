@@ -18,7 +18,9 @@
                                 <button class="button-green-large" class="u-full-width" id="add-friend-search-submit">Search</button>
                             </div>
                             <%if (globalUserSearchQuery) {%>
-                            <%=globalUserSearchQuery%>
+                                <% globalUserSearchQuery.forEach(function(user){ %>
+                                    <p><%=user.username%></p>
+                                <% }); %>
                             <%}%>
                         </form>
                     </div>
