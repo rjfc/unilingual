@@ -30,10 +30,11 @@ passport.deserializeUser(function(id, done) {
     });
 
 });
-app.use(function(req,res,next) {
+app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.loginError = req.flash("loginError");
     res.locals.registerError = req.flash("registerError");
+    res.locals.globalUserSearchQuery = req.globalUserSearchQuery;
     next();
 });
 // Passport login LocalStrategy
@@ -81,7 +82,7 @@ passport.use("register", new LocalStrategy({
     function(req, username, password, done) {
         findOrCreateUser = function(){
             // find a user in Mongo with provided username
-            User.findOne({"username" : username},function(error, user) {
+            User.findOne({"username" : new RegExp('^' + username + '$', "i")}, function(error, user) {
                 // In case of any error return
                 if (error){
                     console.log("USER_SIGN_UP_ERROR: " + error);
@@ -136,17 +137,23 @@ app.post('/login', passport.authenticate('login', {
     failureFlash : true
 }));
 
+// POST ROUTE: logout user
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+});
+
 // GET ROUTE: talk page
 app.get("/talk", isLoggedIn, function(req, res) {
     res.render("talk");
 });
 
 // POST ROUTE: Search for users to add
-app.post('/searchGlobalFriends', function(req,res){
-    var regex = new RegExp(req.body.friendSearch, 'i');  // 'i' makes it case insensitive
-    console.log(req.body.friendSearch);
-    return User.find({text: regex}, function(err, q){
-        return res.send(q);
+app.post('/searchGlobalUsers', function(req, res){
+    var regex = new RegExp(req.body.globalUserSearch, 'i');
+    console.log("GLOBAL_USER_SEARCH: " + req.body.globalUserSearch);
+    User.find({username: regex}, function(err, globalUserSearchQuery){
+        res.render("talk", {globalUserSearchQuery : globalUserSearchQuery});
     });
 });
 

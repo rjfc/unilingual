@@ -28,7 +28,12 @@
                                 <a class="">I forgot my password</a>
                             </div>
                         </label>
-
+                        <label class="form-label">
+                            <div class="row">
+                                <input type="checkbox">
+                                <span class="label-body">Remember me</span>
+                            </div>
+                        </label>
                         <span id="log-in-error">
                             <% if (loginError){ %>
                                 <%= loginError %>
@@ -85,7 +90,7 @@
                     </div>
                     <label class="form-label">
                         <div class="row">
-                            <input type="checkbox">
+                            <input id="checkbox-agree-tos-pp" type="checkbox">
                             <span class="label-body">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
                         </div>
                     </label>

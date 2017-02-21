@@ -54,7 +54,6 @@ html,body
 {
     width: 100%;
     height: 100%;
-
 }
 
 body {
@@ -379,10 +378,12 @@ h5 {
 }
 
 #log-in-error {
+    position: relative;
     margin: 0;
     font-family: 'Lato', sans-serif;
     color: #EE372E;
     font-weight: Bold;
+    bottom: 15px;
 }
 
 .options-bar-text {
@@ -436,6 +437,10 @@ h5 {
     position: relative;
     left: 160px;
     bottom: 94px;
+}
+
+#options-bar-logout {
+    text-decoration: none;
 }
 
 /*
@@ -581,6 +586,10 @@ h5 {
     margin-bottom: 15px !important;
 }
 
+.log-in-popup .button-green-large {
+    position: relative;
+    bottom: 15px;
+}
 
 /*
  Forms
@@ -605,6 +614,11 @@ h5 {
     bottom: 94px;
     font-style: italic;
     border: none;
+}
+
+.log-in-popup .form-label {
+    position: relative;
+    bottom: 10px;
 }
 
 /*

@@ -50,8 +50,10 @@ if(addFriendDiv == "opened"){
 else {
     $(".add-friend-popup-wrapper").hide();
 }
+
 // Show error when log in form fields are empty
 $("#log-in-form").submit(function(event) {
+
     if ($("#log-in-username-input").val().trim() == "") {
         $("#log-in-error").html("The username field is empty.");
         event.preventDefault();
@@ -60,6 +62,7 @@ $("#log-in-form").submit(function(event) {
         $("#log-in-error").html("The password field is empty.");
         event.preventDefault();
     }
+    localStorage.setItem("loginDiv", "closed");
 });
 
 // Show error when sign up form fields are empty
@@ -78,6 +81,10 @@ $("#sign-up-form").submit(function( event ) {
     }
     else if (!isValidEmailAddress($("#sign-up-email-input").val())) {
         $("#sign-up-error").html("The email provided is invalid.");
+        event.preventDefault();
+    }
+    else if (!$('#checkbox-agree-tos-pp').prop("checked")) {
+        $("#sign-up-error").html("You must agree to the Terms of Service and Privacy Policy.");
         event.preventDefault();
     }
 });
