@@ -17,12 +17,17 @@
                             <div class="row">
                                 <button class="button-green-large" class="u-full-width" id="add-friend-search-submit">Search</button>
                             </div>
-                            <%if (globalUserSearchQuery) {%>
-                                <% globalUserSearchQuery.forEach(function(user){ %>
-                                    <p><%=user.username%></p>
-                                <% }); %>
-                            <%}%>
                         </form>
+                        <%if (globalUserSearchQuery) {%>
+                            <% globalUserSearchQuery.forEach(function(user){ %>
+                                <% if (user.username != currentUser.username) {%>
+                                    <p><%=user.username%> - <%=user.language%></p>
+                                <%}%>
+                            <% }); %>
+                            <% if (globalUserSearchQuery.length == 0) {%>
+                                <p>Could not find any users</p>
+                            %}%>
+                        <%}%>
                     </div>
                 </div>
             </div>
