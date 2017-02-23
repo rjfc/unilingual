@@ -10,7 +10,7 @@
                             <h4>Add Friend</h4>
                         </div>
                         <br>
-                        <form action="/searchGlobalUsers" method="POST" >
+                        <form action="/searchGlobalUsers" method="POST" id="form-search-global-users">
                             <div class="row">
                                 <input type="text" name="globalUserSearch" class="u-full-width" placeholder="Search" id="add-friend-search-input">
                             </div>
@@ -21,8 +21,9 @@
                         <%if (globalUserSearchQuery) {%>
                             <% globalUserSearchQuery.forEach(function(user){ %>
                                 <% if (user.username != currentUser.username) {%>
+                                    <br>
                                     <img class="image-global-friend" src="<%=user.profilePicture%>"><p class="global-friend-text"><b><%=user.username%></b><br><i><%=user.language%></i></p>
-                                    <img class="image-add-global-friend" src="images/icons/add-plus.png">
+                                    <a href="#add-<%=user._id%>"><img class="image-add-global-friend" src="images/icons/add-plus.png"></a>
                                 <%}%>
                             <% }); %>
                             <% if (globalUserSearchQuery.length == 0) {%>

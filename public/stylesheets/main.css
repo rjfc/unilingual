@@ -449,6 +449,7 @@ h5 {
     font-size: 95%;
     font-family: 'Lato', sans-serif;
     margin-bottom: 5px;
+    position: relative;
 }
 /*
  Images
@@ -558,12 +559,13 @@ h5 {
     top: 11px;
     float: left;
     margin-right: 10px;
+    margin-left: 24px;
 }
 
 .image-add-global-friend {
     position: relative;
-    float:left;
-    margin-right: 10px;
+    float: left;
+    margin-right: 12px;
     bottom: 36px;
     height: 16px;
 }
@@ -613,6 +615,10 @@ h5 {
     bottom: 15px;
 }
 
+#add-friend-search-submit {
+    margin-bottom: 0;
+}
+
 /*
  Forms
   ______ ____  _____  __  __  _____
@@ -641,6 +647,10 @@ h5 {
 .log-in-popup .form-label {
     position: relative;
     bottom: 10px;
+}
+
+#form-search-global-users {
+    margin-bottom: 0;
 }
 
 /*

@@ -13,7 +13,6 @@ $("#log-in-button").click(function(){
     $(".log-in-popup-wrapper").show();
     $("#log-in-email-input").focus();
 });
-
 // Open add friend popup and dark overlay on button click
 $("#add-friend-button").click(function(){
     localStorage.setItem("addFriendDiv", "opened");
