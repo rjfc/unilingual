@@ -445,6 +445,11 @@ h5 {
     text-decoration: none;
 }
 
+.global-friend-text {
+    font-size: 95%;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 5px;
+}
 /*
  Images
   _____ __  __          _____ ______  _____
@@ -546,6 +551,21 @@ h5 {
     position: relative;
     left: 1176px;
     bottom: 180px;
+}
+
+.image-global-friend {
+    position: relative;
+    top: 11px;
+    float: left;
+    margin-right: 10px;
+}
+
+.image-add-global-friend {
+    position: relative;
+    float:left;
+    margin-right: 10px;
+    bottom: 36px;
+    height: 16px;
 }
 
 /*

@@ -21,12 +21,13 @@
                         <%if (globalUserSearchQuery) {%>
                             <% globalUserSearchQuery.forEach(function(user){ %>
                                 <% if (user.username != currentUser.username) {%>
-                                    <p><%=user.username%> - <%=user.language%></p>
+                                    <img class="image-global-friend" src="<%=user.profilePicture%>"><p class="global-friend-text"><b><%=user.username%></b><br><i><%=user.language%></i></p>
+                                    <img class="image-add-global-friend" src="images/icons/add-plus.png">
                                 <%}%>
                             <% }); %>
                             <% if (globalUserSearchQuery.length == 0) {%>
                                 <p>Could not find any users</p>
-                            %}%>
+                            <%}%>
                         <%}%>
                     </div>
                 </div>
@@ -62,7 +63,7 @@
                     <div id="current-user-div">
                         <div class="user-status" id="current-user-status"></div>
                         <a href="#"><img id="current-user-profile-picture" src="images/talk/blank-profile-picture.png"></a>
-                        <%if (currentUser) { %>
+                        <%if (currentUser)  {%>
                             <h4 id="current-user-name"><%=currentUser.username%></h4>
                             <a id="current-user-language" href="#"><em><%=currentUser.language%></em> v</a>
                         <%}%>
