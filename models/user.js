@@ -12,10 +12,10 @@ UserSchema = new mongoose.Schema({
     email:  String,
     password: String,
     language: { type: String, default: "English" },
-    profilePicture: { data: Buffer, contentType: String },
+    profilePicture: { type: String, default: "/images/talk/blank-profile-picture.png" },
     pendingFriend: [this],
     friends: [this]
-});
+})
 
 UserSchema.methods.comparePassword = function(password) {
     if ( ! this.password ) { return false; }

@@ -556,7 +556,8 @@ h5 {
 
 .image-global-friend {
     position: relative;
-    top: 11px;
+    height: 45px;
+    border-radius: 10px;
     float: left;
     margin-right: 10px;
     margin-left: 24px;
