@@ -1,12 +1,16 @@
 var express          = require("express"),
     app              = express(),
+    path             = require("path"),
     flash            = require("connect-flash"),
+    mkdirp           = require("mkdirp"),
+    multer           = require("multer"),
     mongoose         = require("mongoose"),
     passport         = require("passport"),
     bodyParser       = require("body-parser"),
     expressSession   = require("express-session"),
     LocalStrategy    = require("passport-local").Strategy,
     User             = require("./models/user");
+
 // Port for server to listen on
 var port = 8080;
 
@@ -14,7 +18,7 @@ mongoose.connect("mongodb://localhost/unilingual");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(flash());
-app.use(express.static(__dirname + "/public"))
+app.use(express.static(__dirname + "/public"));
 
 // PASSPORT CONFIGURATION
 app.use(expressSession({secret: "MMM I love me some good garlic bread"}));
@@ -30,6 +34,7 @@ passport.deserializeUser(function(id, done) {
     });
 
 });
+
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.loginError = req.flash("loginError");
@@ -37,6 +42,27 @@ app.use(function(req, res, next) {
     res.locals.globalUserSearchQuery = req.globalUserSearchQuery;
     next();
 });
+
+// MULTER CONFIGURATION
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        //var code = JSON.parse(req.body.model).empCode;
+        var dest = "public/images/profile-pictures";
+        mkdirp(dest, function (err) {
+            console.log(dest);
+            if (err) cb(err, dest);
+            else cb(null, dest);
+        });
+    },
+    filename: function (req, file, cb) {
+        if (req.user) {
+            cb(null, req.user._id + path.extname(file.originalname));
+        }
+    }
+});
+
+var upload = multer({ storage: storage });
+
 // Passport login LocalStrategy
 passport.use("login", new LocalStrategy({
     passReqToCallback : true
@@ -149,12 +175,18 @@ app.get("/talk", isLoggedIn, function(req, res) {
 });
 
 // POST ROUTE: Search for users to add
-app.post('/searchGlobalUsers', function(req, res){
+app.post("/searchGlobalUsers", function(req, res) {
     var regex = new RegExp(req.body.globalUserSearch, 'i');
     console.log("GLOBAL_USER_SEARCH: " + req.body.globalUserSearch);
     User.find({username: regex}, function(err, globalUserSearchQuery){
         res.render("talk", {globalUserSearchQuery : globalUserSearchQuery});
     });
+});
+
+// POST ROUTE: Upload profile picture
+app.post("/uploadProfilePicture", upload.any(), function(req, res) {
+    console.log(req.body);
+    res.send(req.files);
 });
 
 // Middleware to check if user is logged in

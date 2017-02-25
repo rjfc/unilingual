@@ -7,12 +7,18 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 }
 
+// Open user profile popup and dark overlay on button click
+$("#current-user-profile-picture").click(function(){
+    $(".profile-picture-popup-wrapper").show();
+});
+
 // Open login popup and dark overlay on button click
 $("#log-in-button").click(function(){
     localStorage.setItem("loginDiv", "opened");
     $(".log-in-popup-wrapper").show();
     $("#log-in-email-input").focus();
 });
+
 // Open add friend popup and dark overlay on button click
 $("#add-friend-button").click(function(){
     localStorage.setItem("addFriendDiv", "opened");
@@ -30,6 +36,11 @@ $(".dark-overlay, a[href='#close-log-in-popup']").click(function(){
 $(".dark-overlay, a[href='#close-add-friend-popup']").click(function(){
     localStorage.setItem("addFriendDiv", "closed");
     $(".add-friend-popup-wrapper").hide();
+});
+
+// Close add friend popup and dark overlay on dark overlay click or popup close click
+$(".dark-overlay, a[href='#close-profile-picture-popup']").click(function(){
+    $(".profile-picture-popup-wrapper").hide();
 });
 
 // Show login div on refresh
@@ -52,7 +63,6 @@ else {
 
 // Show error when log in form fields have error
 $("#log-in-form").submit(function(event) {
-
     if ($("#log-in-username-input").val().trim() == "") {
         $("#log-in-error").html("The username field is empty.");
         event.preventDefault();

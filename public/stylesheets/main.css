@@ -185,7 +185,7 @@ footer {
     display: none;
 }
 
-.log-in-popup {
+.popup {
     position: fixed;
     right: 0;
     left: 0;
@@ -277,6 +277,12 @@ footer {
     display: none;
 }
 
+.profile-picture-popup-wrapper {
+    position: fixed;
+    z-index: 10;
+    display: none;
+}
+
 /*
  Text
   _______ ________   _________
@@ -359,15 +365,15 @@ h5 {
     margin-bottom: 2px;
 }
 
-.log-in-popup h4 {
+.popup h4 {
     margin-bottom: 0;
 }
 
-.log-in-popup label {
+.popup label {
     margin-top: 14px;
 }
 
-.log-in-popup label > .row > a {
+.popup label > .row > a {
     font-weight: Bold;
     color: #35B67C;
 }
@@ -515,7 +521,7 @@ h5 {
     top: 7px;
 }
 
-#current-user-profile-picture {
+#image-current-user-profile-picture {
     height: 85px;
     border-radius: 10px;
     position: relative;
@@ -571,6 +577,16 @@ h5 {
     height: 16px;
 }
 
+.image-current-user {
+    position: relative;
+    height: 245px;
+    border-radius: 10px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 24px;
+}
+
+
 /*
  Buttons
   ____  _    _ _______ _______ ____  _   _  _____
@@ -611,7 +627,7 @@ h5 {
     margin-bottom: 15px !important;
 }
 
-.log-in-popup .button-green-large {
+.popup .button-green-large {
     position: relative;
     bottom: 15px;
 }
@@ -645,7 +661,7 @@ h5 {
     border: none;
 }
 
-.log-in-popup .form-label {
+.popup .form-label {
     position: relative;
     bottom: 10px;
 }

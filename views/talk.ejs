@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="two-half column">
-                    <div class="log-in-popup">
+                    <div class="popup">
                         <a href="#close-add-friend-popup"><img src="/images/icons/dark-grey-x.png" class="image-popup-close"></a>
                         <div class="row center">
                             <h4>Add Friend</h4>
@@ -30,6 +30,36 @@
                                 <p>Could not find any users</p>
                             <%}%>
                         <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dark-overlay">
+        </div>
+    </div>
+    <div class="profile-picture-popup-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="two-half column">
+                    <div class="popup">
+                        <a href="#close-profile-picture-popup"><img src="/images/icons/dark-grey-x.png" class="image-popup-close"></a>
+                        <div class="row center">
+                            <h4>Profile Picture</h4>
+                        </div>
+                        <br>
+                        <form action="/uploadProfilePicture" enctype="multipart/form-data" method="POST" id="form-upload-profile-picture">
+                            <div class="row center">
+                                <%if (currentUser)  {%>
+                                    <img class="image-current-user" src="<%=currentUser.profilePicture%>">
+                                <%}%>
+                            </div>
+                            <div class="row">
+                                <input type="file" name="uploadProfilePicture" id="add-friend-search-input">
+                            </div>
+                            <div class="row">
+                                <button class="button-green-large" class="u-full-width" id="add-friend-search-submit">Upload</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -64,7 +94,7 @@
                     <div id="current-user-div">
                         <div class="user-status" id="current-user-status"></div>
                         <%if (currentUser)  {%>
-                            <a href="#"><img id="current-user-profile-picture" src="<%=currentUser.profilePicture%>"></a>
+                            <a href="#" id="current-user-profile-picture"><img id="image-current-user-profile-picture" src="<%=currentUser.profilePicture%>"></a>
                             <h4 id="current-user-name"><%=currentUser.username%></h4>
                             <a id="current-user-language" href="#"><em><%=currentUser.language%></em> v</a>
                         <%}%>
