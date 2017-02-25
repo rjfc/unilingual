@@ -1,4 +1,5 @@
 var express          = require("express"),
+    fs               = require("fs"),
     app              = express(),
     path             = require("path"),
     flash            = require("connect-flash"),
@@ -32,7 +33,6 @@ passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
         done(err, user);
     });
-
 });
 
 app.use(function(req, res, next) {
@@ -46,8 +46,9 @@ app.use(function(req, res, next) {
 // MULTER CONFIGURATION
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        //var code = JSON.parse(req.body.model).empCode;
-        var dest = "public/images/profile-pictures";
+        if (req.user) {
+            var dest = "public/images/profile-pictures";
+        }
         mkdirp(dest, function (err) {
             console.log(dest);
             if (err) cb(err, dest);
@@ -58,7 +59,7 @@ var storage = multer.diskStorage({
         if (req.user) {
             cb(null, req.user._id + path.extname(file.originalname));
         }
-    }
+    },
 });
 
 var upload = multer({ storage: storage });
@@ -172,6 +173,7 @@ app.get("/logout", function(req, res) {
 // GET ROUTE: talk page
 app.get("/talk", isLoggedIn, function(req, res) {
     res.render("talk");
+    console.log(req.user.profilePicture);
 });
 
 // POST ROUTE: Search for users to add
@@ -185,8 +187,19 @@ app.post("/searchGlobalUsers", function(req, res) {
 
 // POST ROUTE: Upload profile picture
 app.post("/uploadProfilePicture", upload.any(), function(req, res) {
+    //"public/users/" + req.user._id + "/profile-picture.png"
+
+    User.findByIdAndUpdate(req.user._id, { profilePicture: "/images/profile-pictures/" + req.user._id + ".png"}, { new: true }, function (err) {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            console.log("Profile pic changed");
+        }
+    });
+    console.log(req.user.profilePicture);
     console.log(req.body);
-    res.send(req.files);
+    res.redirect("/talk");
 });
 
 // Middleware to check if user is logged in
