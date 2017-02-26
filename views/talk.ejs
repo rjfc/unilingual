@@ -49,15 +49,14 @@
                         <br>
                         <form action="/uploadProfilePicture" enctype="multipart/form-data" method="POST" id="form-upload-profile-picture">
                             <div class="row center">
+                                <div class="twelve columns">
                                 <%if (currentUser)  {%>
-                                    <img class="image-current-user" src="<%=currentUser.profilePicture%>">
+                                    <img class="image-current-user u-max-full-width" src="<%=currentUser.profilePicture%>">
                                 <%}%>
+                                </div>
                             </div>
-                            <div class="row">
-                                <input type="file" name="uploadProfilePicture" id="add-friend-search-input">
-                            </div>
-                            <div class="row">
-                                <button class="button-green-large" class="u-full-width" id="add-friend-search-submit">Upload</button>
+                            <div class="row center">
+                                <input type="file" accept="image/*" name="uploadProfilePicture" id="profile-picture-upload-image-input">
                             </div>
                         </form>
                     </div>

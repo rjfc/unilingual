@@ -523,6 +523,7 @@ h5 {
 
 #image-current-user-profile-picture {
     height: 85px;
+    width: 85px;
     border-radius: 10px;
     position: relative;
     left: 27px;
@@ -563,6 +564,7 @@ h5 {
 .image-global-friend {
     position: relative;
     height: 45px;
+    width: 45px;
     border-radius: 10px;
     float: left;
     margin-right: 10px;
@@ -580,12 +582,9 @@ h5 {
 .image-current-user {
     position: relative;
     height: 245px;
+    width: 245px;
     border-radius: 10px;
-    float: left;
-    margin-right: 10px;
-    margin-left: 24px;
 }
-
 
 /*
  Buttons

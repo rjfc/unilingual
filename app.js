@@ -15,6 +15,9 @@ var express          = require("express"),
 // Port for server to listen on
 var port = 8080;
 
+// Variable so database knows what file extension profile picture is
+var profilePictureExtension;
+
 mongoose.connect("mongodb://localhost/unilingual");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -47,7 +50,7 @@ app.use(function(req, res, next) {
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (req.user) {
-            var dest = "public/images/profile-pictures";
+            var dest = "public/users/" + req.user._id;
         }
         mkdirp(dest, function (err) {
             console.log(dest);
@@ -57,7 +60,8 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         if (req.user) {
-            cb(null, req.user._id + path.extname(file.originalname));
+            cb(null, "profile-picture" + path.extname(file.originalname));
+            profilePictureExtension = path.extname(file.originalname);
         }
     },
 });
@@ -188,8 +192,7 @@ app.post("/searchGlobalUsers", function(req, res) {
 // POST ROUTE: Upload profile picture
 app.post("/uploadProfilePicture", upload.any(), function(req, res) {
     //"public/users/" + req.user._id + "/profile-picture.png"
-
-    User.findByIdAndUpdate(req.user._id, { profilePicture: "/images/profile-pictures/" + req.user._id + ".png"}, { new: true }, function (err) {
+    User.findByIdAndUpdate(req.user._id, { profilePicture: "/users/" + req.user._id + "/profile-picture" + profilePictureExtension}, { new: true }, function (err) {
         if (err) {
             console.log(err)
         }

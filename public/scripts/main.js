@@ -7,6 +7,11 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 }
 
+// Submit profile picture form on image choose
+$("#profile-picture-upload-image-input").change(function() {
+    $("#form-upload-profile-picture").submit();
+});
+
 // Open user profile popup and dark overlay on button click
 $("#current-user-profile-picture").click(function(){
     $(".profile-picture-popup-wrapper").show();
