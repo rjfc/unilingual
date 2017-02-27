@@ -53,7 +53,6 @@ var storage = multer.diskStorage({
             var dest = "public/users/" + req.user._id;
         }
         mkdirp(dest, function (err) {
-            console.log(dest);
             if (err) cb(err, dest);
             else cb(null, dest);
         });
@@ -100,6 +99,7 @@ passport.use("login", new LocalStrategy({
                 console.log("USER_LOG_IN_ERROR: '" + username + "' ENTERED INVALID PASSWORD");
                 return done( null, false, req.flash("loginError", "The password is invalid."));
             }
+            console.log("USER_LOG_IN_SUCCESS: '" + username + "' LOGGED IN");
             // User and password both match, return user from
             // done method which will be treated like success
             return done(null, user);
@@ -177,13 +177,12 @@ app.get("/logout", function(req, res) {
 // GET ROUTE: talk page
 app.get("/talk", isLoggedIn, function(req, res) {
     res.render("talk");
-    console.log(req.user.profilePicture);
 });
 
 // POST ROUTE: Search for users to add
 app.post("/searchGlobalUsers", function(req, res) {
     var regex = new RegExp(req.body.globalUserSearch, 'i');
-    console.log("GLOBAL_USER_SEARCH: " + req.body.globalUserSearch);
+    console.log("GLOBAL_USER_SEARCH: '" + req.user.username + "' SEARCHED FOR '" + req.body.globalUserSearch + "'");
     User.find({username: regex}, function(err, globalUserSearchQuery){
         res.render("talk", {globalUserSearchQuery : globalUserSearchQuery});
     });
@@ -197,11 +196,9 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
             console.log(err)
         }
         else {
-            console.log("Profile pic changed");
+            console.log("PROFILE_PICTURE_CHANGED: '" + req.user.username + "' UPDATED PROFILE PICTURE");
         }
     });
-    console.log(req.user.profilePicture);
-    console.log(req.body);
     res.redirect("/talk");
 });
 

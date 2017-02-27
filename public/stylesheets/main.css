@@ -635,6 +635,22 @@ h5 {
     margin-bottom: 0;
 }
 
+#profile-picture-upload-image-label {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    line-height: 28px;
+    font-weight: Bold;
+    height: 30px;
+    width: 120px;
+    background-color: #35B67C;
+    margin: auto;
+    text-align: center;
+}
+
+#profile-picture-upload-image-label:hover {
+    cursor: pointer;
+}
+
 /*
  Forms
   ______ ____  _____  __  __  _____
@@ -667,6 +683,11 @@ h5 {
 
 #form-search-global-users {
     margin-bottom: 0;
+}
+
+#profile-picture-upload-image-input {
+    margin: 0;
+    opacity: 0;
 }
 
 /*
