@@ -18,6 +18,9 @@ var port = 8080;
 // Variable so database knows what file extension profile picture is
 var profilePictureExtension;
 
+// Current time in UTC
+var currentTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
 mongoose.connect("mongodb://localhost/unilingual");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -71,37 +74,30 @@ var upload = multer({ storage: storage });
 passport.use("login", new LocalStrategy({
     passReqToCallback : true
 }, function(req, username, password, done) {
-    // check in mongo if a user with username exists or not
+    // Check in mongo if a user with username exists or not
     User.findOne({"username" : username },
         function(error, user) {
             // In case of any error, return using the done method
             if (error)
                 return done(error);
-            // Username does not exist, log error & redirect back
+            // User not found
             if (!user){
-                console.log("USER_LOG_IN_ERROR: USERNAME '" + username + "' DOES NOT EXIST");
+                console.log(currentTime + " - USER_LOG_IN_ERROR: USERNAME '" + username + "' DOES NOT EXIST");
                 return done(null, false,
                     req.flash("loginError", "A user could not be found with the username provided."));
             }
-            /*// User exists but wrong password, log the error
-            if (!user.validPassword(password)){
-                console.log('Invalid Password');
-                return done( null, false, req.flash('message', 'Invalid Password') );
-            }
-            // User and password both match, return user from
-            // done method which will be treated like success
-            return done(null, user);*/
+            // User and password both match, login success
+            return done(null, user);
             if (user && user.comparePassword(password)) {
-                // user found, password is correct. do what you want to do
+                // User and password both match, login success
+                console.log(currentTime + " - USER_LOG_IN_SUCCESS: '" + username + "' LOGGED IN");
                 return done(null, user);
             } else {
-                // user not found or wrong password.
-                console.log("USER_LOG_IN_ERROR: '" + username + "' ENTERED INVALID PASSWORD");
+                // Wrong password
+                console.log(currentTime + " - USER_LOG_IN_ERROR: '" + username + "' ENTERED INVALID PASSWORD");
                 return done( null, false, req.flash("loginError", "The password is invalid."));
             }
-            console.log("USER_LOG_IN_SUCCESS: '" + username + "' LOGGED IN");
-            // User and password both match, return user from
-            // done method which will be treated like success
+            // User and password both match, login success
             return done(null, user);
         }
     );
@@ -116,12 +112,12 @@ passport.use("register", new LocalStrategy({
             User.findOne({"username" : new RegExp('^' + username + '$', "i")}, function(error, user) {
                 // In case of any error return
                 if (error){
-                    console.log("USER_SIGN_UP_ERROR: " + error);
+                    console.log(currentTime + " - USER_SIGN_UP_ERROR: " + error);
                     return done(error);
                 }
                 // already exists
                 if (user) {
-                    console.log("USER_SIGN_UP_ERROR: USER '" + username + "' ALREADY EXISTS");
+                    console.log(currentTime + " - USER_SIGN_UP_ERROR: USER '" + username + "' ALREADY EXISTS");
                     return done(null, false,
                         req.flash("registerError", "A user with the username provided already exists."));
                 } else {
@@ -135,10 +131,10 @@ passport.use("register", new LocalStrategy({
                     // save the user
                     newUser.save(function(err) {
                         if (err){
-                            console.log("USER_SIGN_UP_ERROR: COULD NOT SAVE USER - " + err);
+                            console.log(currentTime + " - USER_SIGN_UP_ERROR: COULD NOT SAVE USER - " + err);
                             throw err;
                         }
-                        console.log("USER_SIGN_UP_SUCCESS: NEW USER '" + username + "'");
+                        console.log(currentTime + " - USER_SIGN_UP_SUCCESS: NEW USER '" + username + "'");
                         return done(null, newUser);
                     });
                 }
@@ -182,7 +178,7 @@ app.get("/talk", isLoggedIn, function(req, res) {
 // POST ROUTE: Search for users to add
 app.post("/searchGlobalUsers", function(req, res) {
     var regex = new RegExp(req.body.globalUserSearch, 'i');
-    console.log("GLOBAL_USER_SEARCH: '" + req.user.username + "' SEARCHED FOR '" + req.body.globalUserSearch + "'");
+    console.log(currentTime + " - GLOBAL_USER_SEARCH: '" + req.user.username + "' SEARCHED FOR '" + req.body.globalUserSearch + "'");
     User.find({username: regex}, function(err, globalUserSearchQuery){
         res.render("talk", {globalUserSearchQuery : globalUserSearchQuery});
     });
@@ -196,7 +192,7 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
             console.log(err)
         }
         else {
-            console.log("PROFILE_PICTURE_CHANGED: '" + req.user.username + "' UPDATED PROFILE PICTURE");
+            console.log(currentTime + " - PROFILE_PICTURE_CHANGED: '" + req.user.username + "' UPDATED PROFILE PICTURE");
         }
     });
     res.redirect("/talk");
