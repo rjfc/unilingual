@@ -201,7 +201,7 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
 // POST ROUTE: Add friend
 app.post("/addFriend", function(req, res) {
     var conditions = {
-        username: req.user.username,
+        username: req.body.globalUserName,
         'pendingFriends._id': {$ne: req.user._id}
     }
     var update = {
