@@ -21,9 +21,12 @@
                         <%if (globalUserSearchQuery) {%>
                             <% globalUserSearchQuery.forEach(function(user){ %>
                                 <% if (user.username != currentUser.username) {%>
-                                    <br>
-                                    <img class="image-global-friend" src="<%=user.profilePicture%>"><p class="global-friend-text"><b><%=user.username%></b><br><i><%=user.language%></i></p>
-                                    <a href="#add-<%=user._id%>"><img class="image-add-global-friend" src="images/icons/add-plus.png"></a>
+                                    <form action="/addFriend" method="POST" id="form-add-friend">
+                                        <br>
+                                        <textarea id="hidden-add-user-name-input" name="globalUserName"><%=user.username%></textarea>
+                                        <img class="image-global-friend" src="<%=user.profilePicture%>"><p class="global-friend-text"><b><%=user.username%></b><br><i><%=user.language%></i></p>
+                                        <a onclick="document.getElementById('form-add-friend').submit();"><img class="image-add-global-friend" src="images/icons/add-plus.png"></a>
+                                    </form>
                                 <%}%>
                             <% }); %>
                             <% if (globalUserSearchQuery.length == 0) {%>
@@ -105,6 +108,20 @@
                         <input id="input-search-friends-list" type="text" placeholder="Search friends list">
                         <hr style="margin: 0; position:relative; bottom: 110px;">
                     </div>
+                    <%if (currentUser.pendingFriends) {%>
+                        <div class="row center">
+                            <h6 class="pending-friends-title">Pending Friend Requests</h6>
+                        </div>
+                        <% currentUser.pendingFriends.forEach(function(user){ %>
+                            <a class="friend">
+                                <div class="user-status friend-status"></div>
+                                <img class="friend-profile-picture" src="<%=user.profilePicture%>">
+                                <h5 class="pending-friend-name"><%=user.username%></h5>
+                                <em class="pending-friend-language"><%=user.language%></em>
+                            </a>
+                        <% }); %>
+                        <hr style="margin: 10px 0px 0px 0px; position:relative; bottom: 110px;">
+                    <%}%>
                     <div class="friends-list-div">
                         <a class="friend">
                             <div class="user-status friend-status"></div>

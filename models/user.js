@@ -13,7 +13,7 @@ UserSchema = new mongoose.Schema({
     password: String,
     language: { type: String, default: "English" },
     profilePicture: { type: String, default: "/images/talk/blank-profile-picture.png" },
-    pendingFriend: [this],
+    pendingFriends: [this],
     friends: [this]
 })
 

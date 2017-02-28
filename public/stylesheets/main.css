@@ -457,6 +457,32 @@ h5 {
     margin-bottom: 5px;
     position: relative;
 }
+
+.pending-friends-title {
+    font-weight: Bold;
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    bottom: 95px;
+    margin-bottom: 0;
+}
+
+.pending-friend-name {
+    font-family: 'Lato', sans-serif;
+    font-weight: Bold;
+    position: relative;
+    left: 102px;
+    bottom: 100px;
+    color: #35B67C;
+}
+
+.pending-friend-language {
+    font-family: 'Lato', sans-serif;
+    color: #35B67C;
+    position: relative;
+    bottom: 124px;
+    left: 102px;
+}
+
 /*
  Images
   _____ __  __          _____ ______  _____
@@ -688,6 +714,10 @@ h5 {
 #profile-picture-upload-image-input {
     margin: 0;
     opacity: 0;
+}
+
+#hidden-add-user-name-input {
+    display: none;
 }
 
 /*

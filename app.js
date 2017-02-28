@@ -198,6 +198,27 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
     res.redirect("/talk");
 });
 
+// POST ROUTE: Add friend
+app.post("/addFriend", function(req, res) {
+    var conditions = {
+        username: req.user.username,
+        'pendingFriends._id': {$ne: req.user._id}
+    }
+    var update = {
+        $addToSet: {pendingFriends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+    }
+
+    User.findOneAndUpdate(conditions, update, function(error, doc) {
+        if(error) {
+            console.log(currentTime + " - FRIEND_REQUEST_SEND_ERROR: '" + req.user.username + "' TRIED TO SEND A FRIEND REQUEST TO '" + req.body.globalUserName + "'");
+        }
+        else {
+            console.log(currentTime + " - FRIEND_REQUEST_SENT: '" + req.user.username + "' SENT A FRIEND REQUEST TO '" + req.body.globalUserName + "'");
+        }
+        res.redirect("/talk");
+    });
+});
+
 // Middleware to check if user is logged in
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
