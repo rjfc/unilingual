@@ -28,7 +28,11 @@ app.use(flash());
 app.use(express.static(__dirname + "/public"));
 
 // PASSPORT CONFIGURATION
-app.use(expressSession({secret: "MMM I love me some good garlic bread"}));
+app.use(expressSession({
+    secret: "MMM I love me some good garlic bread",
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
