@@ -198,11 +198,12 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
     res.redirect("/talk");
 });
 
-// POST ROUTE: Add friend
+// POST ROUTE: Send friend request
 app.post("/addFriend", function(req, res) {
     var conditions = {
         username: req.body.globalUserName,
-        'pendingFriends._id': {$ne: req.user._id}
+        'pendingFriends._id': {$ne: req.user._id},
+        'friends._id': {$ne: req.user._id}
     }
     var update = {
         $addToSet: {pendingFriends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
@@ -214,6 +215,28 @@ app.post("/addFriend", function(req, res) {
         }
         else {
             console.log(currentTime + " - FRIEND_REQUEST_SENT: '" + req.user.username + "' SENT A FRIEND REQUEST TO '" + req.body.globalUserName + "'");
+        }
+        res.redirect("/talk");
+    });
+});
+
+// POST ROUTE: Accept friend request
+app.post("/acceptFriend", function(req, res) {
+    var conditions = {
+        username: req.body.globalUserName,
+        'pendingFriends._id': {$eq: req.user._id},
+        'friends._id': {$ne: req.user._id}
+    }
+    var update = {
+        $pop: {pendingFriends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}},
+        $addToSet: {friends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+    }
+    User.findOneAndUpdate(conditions, update, function(error, doc) {
+        if(error) {
+            console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_ERROR: '" + req.user.username + "' TRIED TO ACCEPT A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
+        }
+        else {
+            console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_SUCCESS: '" + req.user.username + "' ACCEPTED A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
         }
         res.redirect("/talk");
     });
