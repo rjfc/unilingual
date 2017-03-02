@@ -71,12 +71,13 @@ $("#log-in-form").submit(function(event) {
     if ($("#log-in-username-input").val().trim() == "") {
         $("#log-in-error").html("The username field is empty.");
         event.preventDefault();
+        localStorage.setItem("loginDiv", "closed");
     }
     else if ($("#log-in-password-input").val() == "") {
         $("#log-in-error").html("The password field is empty.");
         event.preventDefault();
+        localStorage.setItem("loginDiv", "closed");
     }
-    localStorage.setItem("loginDiv", "closed");
 });
 
 // Show error when sign up form fields have error

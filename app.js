@@ -99,7 +99,8 @@ passport.use("login", new LocalStrategy({
             } else {
                 // Wrong password
                 console.log(currentTime + " - USER_LOG_IN_ERROR: '" + username + "' ENTERED INVALID PASSWORD");
-                return done( null, false, req.flash("loginError", "The password is invalid."));
+                return done( null, false,
+                    req.flash("loginError", "The password is invalid."));
             }
             // User and password both match, login success
             return done(null, user);
