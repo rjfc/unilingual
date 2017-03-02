@@ -205,9 +205,16 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
 // POST ROUTE: Send friend request
 app.post("/addFriend", function(req, res) {
     var conditions = {
-        username: req.body.globalUserName,
-        'pendingFriends._id': {$ne: req.user._id},
-        'friends._id': {$ne: req.user._id}
+        $or:[
+            {
+                username: req.body.globalUserName,
+                'pendingFriends._id': {$ne: req.user._id}
+            },
+            {
+                username: req.body.globalUserName,
+                'friends._id': {$ne: req.user._id}
+            }
+        ]
     }
     var update = {
         $addToSet: {pendingFriends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
@@ -226,23 +233,37 @@ app.post("/addFriend", function(req, res) {
 
 // POST ROUTE: Accept friend request
 app.post("/acceptFriend", function(req, res) {
-    var conditions = {
-        username: req.body.globalUserName,
-        'pendingFriends._id': {$eq: req.user._id},
-        'friends._id': {$ne: req.user._id}
+    var conditionsUserAccepted = {
+        username: req.user.username,
+        'pendingFriends.username': {$eq: req.body.globalUserName},
+        'friends.username': {$ne: req.body.globalUserName}
     }
-    var update = {
-        $pop: {pendingFriends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}},
-        $addToSet: {friends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+    var updateUserAccepted = {
+        $pop: {pendingFriends: { _id: req.body.globalUserId, username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}},
+        $addToSet: {friends: { _id: req.body.globalUserId, username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}}
     }
-    User.findOneAndUpdate(conditions, update, function(error, doc) {
+    User.findOneAndUpdate(conditionsUserAccepted, updateUserAccepted, function(error, doc) {
         if(error) {
             console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_ERROR: '" + req.user.username + "' TRIED TO ACCEPT A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
         }
         else {
             console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_SUCCESS: '" + req.user.username + "' ACCEPTED A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
         }
-        res.redirect("/talk");
+        var conditionsUserSent = {
+            username: req.body.globalUserName
+        }
+        var updateUserSent = {
+            $addToSet: {friends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+        }
+        User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
+            if(error) {
+                console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_RETURN_ERROR: '" + req.body.globalUserName + "' TRIED TO RECEIVE AN ACCEPTED AN FRIEND REQUEST FROM '" + req.user.username + "'");
+            }
+            else {
+                console.log(currentTime + " - FRIEND_REQUEST_ACCEPT__RETURN_SUCCESS: '" + req.body.globalUserName + "' RECEIVED AN ACCEPTED FRIEND REQUEST FROM '" + req.user.username + "'");
+            }
+            res.redirect("/talk");
+        });
     });
 });
 

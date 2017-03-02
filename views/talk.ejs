@@ -23,7 +23,7 @@
                                 <% if (user.username != currentUser.username) {%>
                                     <form action="/addFriend" method="POST" id="form-add-friend">
                                         <br>
-                                        <textarea class="hidden-add-user-name-input" name="globalUserName"><%=user.username%></textarea>
+                                        <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
                                         <img class="image-global-friend" src="<%=user.profilePicture%>"><p class="global-friend-text"><b><%=user.username%></b><br><i><%=user.language%></i></p>
                                         <a onclick="document.getElementById('form-add-friend').submit();"><img class="image-add-global-friend" src="images/icons/add-plus.png"></a>
                                     </form>
@@ -115,7 +115,10 @@
                         <% currentUser.pendingFriends.forEach(function(user){ %>
                             <a class="friend">
                                 <form action="/acceptFriend" method="POST" id="form-accept-friend-request">
-                                    <textarea class="hidden-add-user-name-input" name="globalUserName"><%=user.username%></textarea>
+                                    <textarea class="hidden-input" name="globalUserId"><%=user._id%></textarea>
+                                    <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
+                                    <textarea class="hidden-input" name="globalUserLanguage"><%=user.language%></textarea>
+                                    <textarea class="hidden-input" name="globalUserProfilePicture"><%=user.profilePicture%></textarea>
                                     <a onclick="document.getElementById('form-accept-friend-request').submit();" class="accept-friend-request" href="#"><img src="images/icons/green-checkmark.png"></a>
                                 </form>
                                 <form action="/declineFriend" method="POST" id="form-decline-friend-request">
