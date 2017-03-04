@@ -204,15 +204,12 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
 // POST ROUTE: Send friend request
 app.post("/addFriend", function(req, res) {
     var conditions = {
-        $or:[
-            {
-                username: req.body.globalUserName,
-                'pendingFriends._id': {$ne: req.user._id}
-            },
-            {
-                username: req.body.globalUserName,
-                'friends._id': {$ne: req.user._id.toString()}
-            }
+        $and: [
+            {username: req.body.globalUserName},
+            {$or: [
+                {'pendingFriends._id': {$ne: req.user._id.toString()}},
+                {'friends._id': {$ne: req.user._id.toString()}}
+            ]}
         ]
     }
     var update = {
