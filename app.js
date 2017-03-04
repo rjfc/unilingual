@@ -211,7 +211,7 @@ app.post("/addFriend", function(req, res) {
             },
             {
                 username: req.body.globalUserName,
-                'friends._id': {$ne: req.user._id}
+                'friends._id': {$ne: req.user._id.toString()}
             }
         ]
     }
@@ -252,7 +252,7 @@ app.post("/acceptFriend", function(req, res) {
             username: req.body.globalUserName
         }
         var updateUserSent = {
-            $addToSet: {friends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+            $addToSet: {friends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
         }
         User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
             if(error) {
