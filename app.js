@@ -90,8 +90,6 @@ passport.use("login", new LocalStrategy({
                 return done(null, false,
                     req.flash("loginError", "A user could not be found with the username provided."));
             }
-            // User and password both match, login success
-            return done(null, user);
             if (user && user.comparePassword(password)) {
                 // User and password both match, login success
                 console.log(currentTime + " - USER_LOG_IN_SUCCESS: '" + username + "' LOGGED IN");
