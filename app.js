@@ -209,18 +209,11 @@ app.post("/addFriend", function(req, res) {
     var conditions = {
         $or: [
             {$and: [
+                {_id: {$nin: req.user.pendingFriends._id}}, // not a pending friend of U2
+                {_id: {$nin:  req.user.friends._id}},        // not a friend of U2
                 {username: req.body.globalUserName},
-                {$or: [
-                    {'pendingFriends._id': {$ne: req.user._id}},
-                    {'friends._id': {$ne: req.user._id}}
-                ]}
-            ]},
-            {$and: [
-                {username: req.user.username},
-                {$or: [
-                    {'pendingFriends._id': {$ne: req.body.globalUserId}},
-                    {'friends._id': {$ne: req.body.globalUserId}}
-                ]}
+                {'pendingFriends._id': {$ne: req.user._id}}, // U2 is not a pending friend
+                {'friends._id': {$ne: req.user._id}}         // U2 is not a friend
             ]}
         ]
     }
@@ -261,7 +254,7 @@ app.post("/acceptFriend", function(req, res) {
             username: req.body.globalUserName
         }
         var updateUserSent = {
-            $addToSet: {friends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+            $addToSet: {friends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
         }
         User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
             if(error) {
