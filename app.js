@@ -10,7 +10,8 @@ var express          = require("express"),
     bodyParser       = require("body-parser"),
     expressSession   = require("express-session"),
     LocalStrategy    = require("passport-local").Strategy,
-    User             = require("./models/user");
+    User             = require("./models/user"),
+    seedDB           = require("./seeds");
 
 // Port for server to listen on
 var port = 8080;
@@ -26,6 +27,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(flash());
 app.use(express.static(__dirname + "/public"));
+// Seed DB
+seedDB();
 
 // PASSPORT CONFIGURATION
 app.use(expressSession({
@@ -204,11 +207,20 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
 // POST ROUTE: Send friend request
 app.post("/addFriend", function(req, res) {
     var conditions = {
-        $and: [
-            {username: req.body.globalUserName},
-            {$or: [
-                {'pendingFriends._id': {$ne: req.user._id.toString()}},
-                {'friends._id': {$ne: req.user._id.toString()}}
+        $or: [
+            {$and: [
+                {username: req.body.globalUserName},
+                {$or: [
+                    {'pendingFriends._id': {$ne: req.user._id}},
+                    {'friends._id': {$ne: req.user._id}}
+                ]}
+            ]},
+            {$and: [
+                {username: req.user.username},
+                {$or: [
+                    {'pendingFriends._id': {$ne: req.body.globalUserId}},
+                    {'friends._id': {$ne: req.body.globalUserId}}
+                ]}
             ]}
         ]
     }
@@ -249,7 +261,7 @@ app.post("/acceptFriend", function(req, res) {
             username: req.body.globalUserName
         }
         var updateUserSent = {
-            $addToSet: {friends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+            $addToSet: {friends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
         }
         User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
             if(error) {
@@ -270,7 +282,6 @@ function isLoggedIn(req, res, next){
     }
     res.redirect("/");
 }
-
 
 // Listen on set port
 app.listen(port, function() {
