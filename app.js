@@ -40,7 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-    done(null, user._id);
+    done(null, user._id.toString());
 });
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
@@ -60,7 +60,7 @@ app.use(function(req, res, next) {
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         if (req.user) {
-            var dest = "public/users/" + req.user._id;
+            var dest = "public/users/" + req.user._id.toString();
         }
         mkdirp(dest, function (err) {
             if (err) cb(err, dest);
@@ -192,8 +192,8 @@ app.post("/searchGlobalUsers", function(req, res) {
 
 // POST ROUTE: Upload profile picture
 app.post("/uploadProfilePicture", upload.any(), function(req, res) {
-    //"public/users/" + req.user._id + "/profile-picture.png"
-    User.findByIdAndUpdate(req.user._id, { profilePicture: "/users/" + req.user._id + "/profile-picture" + profilePictureExtension}, { new: true }, function (err) {
+    //"public/users/" + req.user._id.toString() + "/profile-picture.png"
+    User.findByIdAndUpdate(req.user._id.toString(), { profilePicture: "/users/" + req.user._id.toString() + "/profile-picture" + profilePictureExtension}, { new: true }, function (err) {
         if (err) {
             console.log(err)
         }
@@ -210,15 +210,15 @@ app.post("/addFriend", function(req, res) {
         $or: [
             {$and: [
                 {_id: {$nin: req.user.pendingFriends._id}}, // not a pending friend of U2
-                {_id: {$nin:  req.user.friends._id}},        // not a friend of U2
+                {_id: {$nin: req.user.friends._id}},        // not a friend of U2
                 {username: req.body.globalUserName},
-                {'pendingFriends._id': {$ne: req.user._id}}, // U2 is not a pending friend
-                {'friends._id': {$ne: req.user._id}}         // U2 is not a friend
+                {'pendingFriends._id.toString()': {$ne: req.user._id.toString()}}, // U2 is not a pending friend
+                {'friends._id.toString()': {$ne: req.user._id.toString()}}         // U2 is not a friend
             ]}
         ]
     }
     var update = {
-        $addToSet: {pendingFriends: { _id: req.user._id, username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+        $addToSet: {pendingFriends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
     }
 
     User.findOneAndUpdate(conditions, update, function(error, doc) {
@@ -240,8 +240,8 @@ app.post("/acceptFriend", function(req, res) {
         'friends.username': {$ne: req.body.globalUserName}
     }
     var updateUserAccepted = {
-        $pop: {pendingFriends: { _id: req.body.globalUserId, username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}},
-        $addToSet: {friends: { _id: req.body.globalUserId, username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}}
+        $pop: {pendingFriends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}},
+        $addToSet: {friends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}}
     }
     User.findOneAndUpdate(conditionsUserAccepted, updateUserAccepted, function(error, doc) {
         if(error) {
