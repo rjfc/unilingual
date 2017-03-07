@@ -206,11 +206,26 @@ app.post("/uploadProfilePicture", upload.any(), function(req, res) {
 
 // POST ROUTE: Send friend request
 app.post("/addFriend", function(req, res) {
+    var pendingIds, friendIds;
+    if (req.user.pendingFriends.length > 0) {
+        pendingIds = new Array(req.user.pendingFriends.length - 1);
+        req.user.pendingFriends.forEach(function (pendingFriend) {
+            pendingIds.push(pendingFriend._id);
+            console.log("Pending friend id: " + pendingFriend._id);
+        })
+    }
+    if (req.user.friends.length > 0) {
+        friendIds = new Array(req.user.friends.length - 1);
+        req.user.friends.forEach(function (friend) {
+            friendIds.push(friend._id);
+            console.log("Friend id: " + friend._id);
+        })
+    }
     var conditions = {
         $or: [
             {$and: [
-                {_id: {$nin: req.user.pendingFriends._id}}, // not a pending friend of U2
-                {_id: {$nin: req.user.friends._id}},        // not a friend of U2
+                {_id: {$nin: pendingIds}}, // not a pending friend of U2
+                {_id: {$nin: friendIds}},        // not a friend of U2
                 {username: req.body.globalUserName},
                 {'pendingFriends._id.toString()': {$ne: req.user._id.toString()}}, // U2 is not a pending friend
                 {'friends._id.toString()': {$ne: req.user._id.toString()}}         // U2 is not a friend
@@ -240,8 +255,8 @@ app.post("/acceptFriend", function(req, res) {
         'friends.username': {$ne: req.body.globalUserName}
     }
     var updateUserAccepted = {
-        $pop: {pendingFriends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}},
-        $addToSet: {friends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.profilePicture}}
+        $pop: {pendingFriends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}},
+        $addToSet: {friends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}}
     }
     User.findOneAndUpdate(conditionsUserAccepted, updateUserAccepted, function(error, doc) {
         if(error) {

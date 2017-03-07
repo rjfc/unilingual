@@ -132,12 +132,16 @@
                         <hr style="margin: 10px 0px 0px 0px; position:relative; bottom: 110px;">
                     <%}%>
                     <div class="friends-list-div">
-                        <a class="friend">
-                            <div class="user-status friend-status"></div>
-                            <img class="friend-profile-picture" src="images/talk/blank-profile-picture.png">
-                            <h5 class="friend-name">Jane Doe</h5>
-                            <em class="friend-language">French</em>
-                        </a>
+                        <%if (currentUser.friends.length > 0) {%>
+                            <% currentUser.friends.forEach(function(user){ %>
+                                <a class="friend">
+                                    <div class="user-status friend-status"></div>
+                                    <img class="friend-profile-picture" src="<%=user.profilePicture%>">
+                                    <h5 class="friend-name"><%=user.username%></h5>
+                                    <em class="friend-language"><%=user.language%></em>
+                                </a>
+                            <% }); %>
+                        <%}%>
                     </div>
                 </div>
             </div>
