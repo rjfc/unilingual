@@ -260,7 +260,7 @@ app.post("/acceptFriend", function(req, res) {
     }
     User.findOneAndUpdate(conditionsUserAccepted, updateUserAccepted, function(error, doc) {
         if(error) {
-            console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_ERROR: '" + req.user.username + "' TRIED TO ACCEPT A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
+            console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_ERROR: '" + req.user.username + "' TRIED TO ACCEPT A FRIEND REQUEST FROM '" + req.body.globalUserName + "'" + " - " + error);
         }
         else {
             console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_SUCCESS: '" + req.user.username + "' ACCEPTED A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
@@ -273,13 +273,33 @@ app.post("/acceptFriend", function(req, res) {
         }
         User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
             if(error) {
-                console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_RETURN_ERROR: '" + req.body.globalUserName + "' TRIED TO RECEIVE AN ACCEPTED AN FRIEND REQUEST FROM '" + req.user.username + "'");
+                console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_RETURN_ERROR: '" + req.body.globalUserName + "' TRIED TO RECEIVE AN ACCEPTED AN FRIEND REQUEST FROM '" + req.user.username + "'"  + " - " + error);
             }
             else {
                 console.log(currentTime + " - FRIEND_REQUEST_ACCEPT__RETURN_SUCCESS: '" + req.body.globalUserName + "' RECEIVED AN ACCEPTED FRIEND REQUEST FROM '" + req.user.username + "'");
             }
             res.redirect("/talk");
         });
+    });
+});
+
+// POST ROUTE: Decline friend request
+app.post("/declineFriend", function(req, res) {
+    var conditions = {
+        username: req.user.username
+    }
+    var update =  {
+        $pull: {pendingFriends: {_id: req.body.globalUserId}}
+    }
+    User.findOneAndUpdate(conditions, update, function(error, doc) {
+        if(error) {
+            console.log(currentTime + " - FRIEND_REQUEST_DECLINE_ERROR: '" + req.user.username + "' TRIED TO DECLINE A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
+            console.log(error);
+        }
+        else {
+            console.log(currentTime + " - FRIEND_REQUEST_DECLINE_SUCCESS: '" + req.user.username + "' DECLINED A FRIEND REQUEST FROM '" + req.body.globalUserName + "'");
+        }
+        res.redirect("/talk");
     });
 });
 
