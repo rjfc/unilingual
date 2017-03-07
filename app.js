@@ -233,7 +233,7 @@ app.post("/addFriend", function(req, res) {
         ]
     }
     var update = {
-        $addToSet: {pendingFriends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+        $push: {pendingFriends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
     }
 
     User.findOneAndUpdate(conditions, update, function(error, doc) {
@@ -255,8 +255,13 @@ app.post("/acceptFriend", function(req, res) {
         'friends.username': {$ne: req.body.globalUserName}
     }
     var updateUserAccepted = {
-        $pop: {pendingFriends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}},
-        $addToSet: {friends: { _id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}}
+        $pop: {pendingFriends: {_id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}},
+        $push: {
+            friends: {
+                $each:[{_id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}],
+                $sort: {username: 1}
+            }
+        }
     }
     User.findOneAndUpdate(conditionsUserAccepted, updateUserAccepted, function(error, doc) {
         if(error) {
@@ -269,7 +274,17 @@ app.post("/acceptFriend", function(req, res) {
             username: req.body.globalUserName
         }
         var updateUserSent = {
-            $addToSet: {friends: { _id: req.user._id.toString(), username: req.user.username, language: req.user.language, profilePicture: req.user.profilePicture}}
+            $push: {
+                friends: {
+                    $each: [{
+                        _id: req.body.globalUserId.toString(),
+                        username: req.body.globalUserName,
+                        language: req.body.globalUserLanguage,
+                        profilePicture: req.body.globalUserProfilePicture
+                    }],
+                    $sort: {username: 1}
+                }
+            }
         }
         User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
             if(error) {
