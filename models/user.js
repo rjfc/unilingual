@@ -2,7 +2,7 @@ var bcrypt   = require("bcryptjs"),
     mongoose = require("mongoose");
 
 // store this funciton in some helper file, instead of storing it in this User Model.
-var hash_password = function( password ) {
+var hash_password = function(password) {
     var salt = bcrypt.genSaltSync(); // enter number of rounds, default: 10
     var hash = bcrypt.hashSync( password, salt );
     return hash;
