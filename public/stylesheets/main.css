@@ -245,11 +245,13 @@ footer {
 .chat-history-div {
     position: relative;
     height: 67.5%;
+    width: 88%;
     background-color: #F8F8F8;
     border: 1px solid #A7A7A7;
     border-radius: 7px;
     padding: 10px 20px 10px 20px;
     bottom: 160px;
+    margin-bottom: 0;
 }
 
 .chat-message-input {
@@ -258,16 +260,15 @@ footer {
     position: relative;
     background-color: #F8F8F8;
     border: 1px solid #A7A7A7;
-    border-radius: 7px;
-    padding: 10px 20px 10px 20px;
+    border-radius: 4px;
+    padding: 10px;
     width: 100%;
     height: 100px !important;
     bottom: 143px;
     resize: none;
-
 }
 
-.chat-message-textarea:focus {
+.chat-message-input:focus {
     border: 1px solid #52CF9E;
 }
 
@@ -593,8 +594,8 @@ h5 {
 .image-chat-call {
     height: 80px;
     position: relative;
-    left: 1176px;
-    bottom: 180px;
+    left: 1220px;
+    bottom: 75px;
 }
 
 .image-global-friend {
@@ -702,9 +703,20 @@ h5 {
 }
 
 .chat-message-send {
+    font-family: 'Lato', sans-serif;
     position: relative;
-    bottom: 90px;
-    height: 100% !important;
+    bottom: 143px;
+    border-radius: 5px;
+    height: 100px !important;
+    transition: 0.2s;
+    font-size: 75%;
+    right: 35px;
+}
+
+.chat-message-send:hover {
+    border: 1px solid #35B67C;
+    color: #35B67C;
+    font-size: 85%;
 }
 
 /*
