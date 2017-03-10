@@ -252,7 +252,7 @@ footer {
     bottom: 160px;
 }
 
-.chat-message-textarea {
+.chat-message-input {
     font-family: 'Lato', sans-serif;
     font-size: 110%;
     position: relative;
@@ -699,6 +699,12 @@ h5 {
 
 #profile-picture-upload-image-label:hover {
     cursor: pointer;
+}
+
+.chat-message-send {
+    position: relative;
+    bottom: 90px;
+    height: 100% !important;
 }
 
 /*
