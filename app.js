@@ -1,6 +1,8 @@
 var express          = require("express"),
-    fs               = require("fs"),
     app              = express(),
+    http             = require("http").Server(app);
+    io               = require("socket.io")(http);
+    fs               = require("fs"),
     path             = require("path"),
     flash            = require("connect-flash"),
     mkdirp           = require("mkdirp"),
@@ -326,7 +328,15 @@ function isLoggedIn(req, res, next){
     res.redirect("/");
 }
 
+// When socket io receives a connection
+io.on("connection", function(socket){
+    socket.on("chat message", function(message) {
+        console.log("Message: " + message);
+    });
+});
+
+
 // Listen on set port
-app.listen(port, function() {
+http.listen(port, function() {
     console.log("Server listening on port " + 8080);
 });

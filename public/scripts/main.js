@@ -103,3 +103,21 @@ $("#sign-up-form").submit(function( event ) {
         event.preventDefault();
     }
 });
+
+// Make new line on ctrl + enter or shift + enter, but submit form when enter pressed
+$(".chat-message-input").keypress(function(event) {
+    if (event.keyCode == 13 && !event.shiftKey) {
+        $("#form-send-message").submit(); //Submit your form here
+        return false;
+    }
+});
+
+//---SOCKET.IO---//
+$(function() {
+    var socket = io();
+    $("#form-send-message").submit(function() {
+        socket.emit("chat message", $(".chat-message-input").val());
+        $(".chat-message-input").val("");
+        return false;
+    });
+});
