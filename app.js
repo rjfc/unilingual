@@ -331,7 +331,7 @@ function isLoggedIn(req, res, next){
 // When socket io receives a connection
 io.on("connection", function(socket){
     socket.on("chat message", function(message) {
-        console.log("Message: " + message);
+        io.emit("chat message", message);
     });
 });
 

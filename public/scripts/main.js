@@ -120,4 +120,7 @@ $(function() {
         $(".chat-message-input").val("");
         return false;
     });
+    socket.on("chat message", function(message) {
+        $(".chat-history-div").append($("<li>").text(message));
+    });
 });
