@@ -21,11 +21,11 @@
                         <%if (globalUserSearchQuery) {%>
                             <% globalUserSearchQuery.forEach(function(user){ %>
                                 <% if (user.username != currentUser.username) {%>
-                                    <form action="/addFriend" method="POST" id="form-add-friend">
+                                    <form action="/addFriend" method="POST" class="form-add-friend" id="form-add-<%=user.username%>">
                                         <br>
                                         <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
                                         <img class="image-global-friend" src="<%=user.profilePicture%>"><p class="global-friend-text"><b><%=user.username%></b><br><i><%=user.language%></i></p>
-                                        <a onclick="document.getElementById('form-add-friend').submit();"><img class="image-add-global-friend" src="images/icons/add-plus.png"></a>
+                                        <a onclick="document.getElementById('form-add-<%=user.username%>').submit();"><img class="image-add-global-friend" src="images/icons/add-plus.png"></a>
                                     </form>
                                 <%}%>
                             <% }); %>
@@ -113,7 +113,7 @@
                             <h6 class="pending-friends-title">Pending Friend Requests</h6>
                         </div>
                         <% currentUser.pendingFriends.forEach(function(user){ %>
-                            <a class="friend">
+                            <div class="pendingFriend">
                                 <form action="/acceptFriend" method="POST" id="form-accept-friend-request">
                                     <textarea class="hidden-input" name="globalUserId"><%=user._id%></textarea>
                                     <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
@@ -129,7 +129,7 @@
                                 <img class="pending-friend-profile-picture" src="<%=user.profilePicture%>">
                                 <h5 class="pending-friend-name"><%=user.username%></h5>
                                 <em class="pending-friend-language"><%=user.language%></em>
-                            </a>
+                            </div>
                         <% }); %>
                         <hr style="margin: 10px 0px 0px 0px; position:relative; bottom: 110px;">
                     <%}%>
@@ -141,6 +141,7 @@
                                     <img class="friend-profile-picture" src="<%=user.profilePicture%>">
                                     <h5 class="friend-name"><%=user.username%></h5>
                                     <em class="friend-language"><%=user.language%></em>
+                                    <div class="friend-backboard"></div>
                                 </a>
                             <% }); %>
                         <%}%>

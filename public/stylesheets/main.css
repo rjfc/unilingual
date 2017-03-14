@@ -136,6 +136,11 @@ footer {
     text-decoration: none;
 }
 
+.pendingFriend {
+
+    text-decoration: none;
+}
+
 .chat-friend-status {
     position: relative;
     border-radius: 50%;
@@ -143,6 +148,13 @@ footer {
     width: 16px;
     top: 45px;
     background-color: #98df6d;
+}
+
+.friend-backboard {
+    position: absolute;
+    height: 80px;
+    width: 41vh;
+    bottom: 90px;
 }
 /*
  Sections
@@ -432,13 +444,14 @@ h5 {
     left: 102px;
     bottom: 100px;
     color: Black;
+    margin: 0;
 }
 
 .friend-language {
     font-family: 'Lato', sans-serif;
     color: Black;
     position: relative;
-    bottom: 124px;
+    bottom: 106px;
     left: 102px;
 }
 
@@ -773,6 +786,9 @@ h5 {
     display: inline-flex;
 }
 
+.form-add-friend {
+    margin-top: -20px;
+}
 
 /*
  General Positioning

@@ -112,6 +112,7 @@ $(".chat-message-input").keypress(function(event) {
     }
 });
 
+// Allows user to open individual chats
 $(".friend").click(function() {
     var currentChatId = localStorage.getItem("currentChatId");
     $(".chat-div[data-userid='" + currentChatId + "']").hide();

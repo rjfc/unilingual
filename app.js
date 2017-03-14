@@ -279,10 +279,10 @@ app.post("/acceptFriend", function(req, res) {
             $push: {
                 friends: {
                     $each: [{
-                        _id: req.body.globalUserId.toString(),
-                        username: req.body.globalUserName,
-                        language: req.body.globalUserLanguage,
-                        profilePicture: req.body.globalUserProfilePicture
+                        _id: req.user._id.toString(),
+                        username: req.user.username,
+                        language: req.user.language,
+                        profilePicture: req.user.profilePicture
                     }],
                     $sort: {username: 1}
                 }
@@ -290,7 +290,7 @@ app.post("/acceptFriend", function(req, res) {
         }
         User.findOneAndUpdate(conditionsUserSent, updateUserSent, function(error, doc) {
             if(error) {
-                console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_RETURN_ERROR: '" + req.body.globalUserName + "' TRIED TO RECEIVE AN ACCEPTED AN FRIEND REQUEST FROM '" + req.user.username + "'"  + " - " + error);
+                console.log(currentTime + " - FRIEND_REQUEST_ACCEPT_RETURN_ERROR: '" + req.body.globalUserName + "' TRIED TO RECEIVE AN ACCEPTED FRIEND REQUEST FROM '" + req.user.username + "'"  + " - " + error);
             }
             else {
                 console.log(currentTime + " - FRIEND_REQUEST_ACCEPT__RETURN_SUCCESS: '" + req.body.globalUserName + "' RECEIVED AN ACCEPTED FRIEND REQUEST FROM '" + req.user.username + "'");
