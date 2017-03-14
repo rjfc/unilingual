@@ -223,12 +223,13 @@ footer {
     padding: 10px 20px 10px 20px;
 }
 
-#chat-div {
+.chat-div {
     height: 90vh;
     background-color: #F8F8F8;
     border: 1px solid #A7A7A7;
     border-radius: 7px;
     padding: 10px 20px 10px 20px;
+    display: none;
 }
 
 #options-bar-div {

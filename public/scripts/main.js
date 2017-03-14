@@ -112,6 +112,14 @@ $(".chat-message-input").keypress(function(event) {
     }
 });
 
+$(".friend").click(function() {
+    var currentChatId = localStorage.getItem("currentChatId");
+    $(".chat-div[data-userid='" + currentChatId + "']").hide();
+    var friendId = $(this).attr("data-userid");
+    $(".chat-div[data-userid='" + friendId + "']").show();
+    localStorage.setItem("currentChatId", friendId);
+});
+
 //---SOCKET.IO---//
 $(function() {
     var socket = io();

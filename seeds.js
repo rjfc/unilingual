@@ -10,6 +10,11 @@ var data = [
         username: "r2",
         email:  "123123@gmail.com",
         password: "123"
+    },
+    {
+        username: "r3",
+        email:  "123123123@gmail.com",
+        password: "123"
     }
 ]
 function seedDB(){
