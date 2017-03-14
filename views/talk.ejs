@@ -114,17 +114,17 @@
                         </div>
                         <% currentUser.pendingFriends.forEach(function(user){ %>
                             <div class="pendingFriend">
-                                <form action="/acceptFriend" method="POST" id="form-accept-friend-request">
+                                <form action="/acceptFriend" method="POST" class="form-accept-friend-request" id="form-accept-<%=user.username%>-request">
                                     <textarea class="hidden-input" name="globalUserId"><%=user._id%></textarea>
                                     <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
                                     <textarea class="hidden-input" name="globalUserLanguage"><%=user.language%></textarea>
                                     <textarea class="hidden-input" name="globalUserProfilePicture"><%=user.profilePicture%></textarea>
-                                    <a onclick="document.getElementById('form-accept-friend-request').submit();" class="accept-friend-request" href="#"><img src="images/icons/green-checkmark.png"></a>
+                                    <img class="accept-friend-request" onclick="document.getElementById('form-accept-<%=user.username%>-request').submit();" src="images/icons/green-checkmark.png">
                                 </form>
-                                <form action="/declineFriend" method="POST" id="form-decline-friend-request">
+                                <form action="/declineFriend" method="POST" class="form-decline-friend-request" id="form-decline-<%=user.username%>-request">
                                     <textarea class="hidden-input" name="globalUserId"><%=user._id%></textarea>
                                     <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
-                                    <a onclick="document.getElementById('form-decline-friend-request').submit();" class="decline-friend-request" href="#"><img src="images/icons/red-x.png"></a>
+                                    <img class="decline-friend-request" onclick="document.getElementById('form-decline-<%=user.username%>-request').submit(); "src="images/icons/red-x.png">
                                 </form>
                                 <img class="pending-friend-profile-picture" src="<%=user.profilePicture%>">
                                 <h5 class="pending-friend-name"><%=user.username%></h5>

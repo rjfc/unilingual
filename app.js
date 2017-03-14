@@ -257,7 +257,7 @@ app.post("/acceptFriend", function(req, res) {
         'friends.username': {$ne: req.body.globalUserName}
     }
     var updateUserAccepted = {
-        $pop: {pendingFriends: {_id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}},
+        $pull: {pendingFriends: {_id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}},
         $push: {
             friends: {
                 $each:[{_id: req.body.globalUserId.toString(), username: req.body.globalUserName, language: req.body.globalUserLanguage, profilePicture: req.body.globalUserProfilePicture}],

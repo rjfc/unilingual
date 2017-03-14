@@ -637,18 +637,26 @@ h5 {
     border-radius: 10px;
 }
 
-.accept-friend-request img {
+.accept-friend-request {
     position: relative;
     height: 16px;
     bottom: 69px;
     right: 5px;
 }
 
-.decline-friend-request img {
+.accept-friend-request:hover {
+    cursor: pointer;
+}
+
+.decline-friend-request {
     position: relative;
     height: 16px;
     bottom: 46px;
     right: 26px;
+}
+
+.decline-friend-request:hover {
+    cursor: pointer;
 }
 
 /*
@@ -776,12 +784,12 @@ h5 {
     display: none;
 }
 
-#form-accept-friend-request {
+.form-accept-friend-request {
     margin: 0;
     display: inline-flex;
 }
 
-#form-decline-friend-request {
+.form-decline-friend-request {
     margin: 0;
     display: inline-flex;
 }
