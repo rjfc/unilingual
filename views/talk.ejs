@@ -113,7 +113,7 @@
                             <h6 class="pending-friends-title">Pending Friend Requests</h6>
                         </div>
                         <% currentUser.pendingFriends.forEach(function(user){ %>
-                            <div class="pendingFriend">
+                            <div class="pending-friend">
                                 <form action="/acceptFriend" method="POST" class="form-accept-friend-request" id="form-accept-<%=user.username%>-request">
                                     <textarea class="hidden-input" name="globalUserId"><%=user._id%></textarea>
                                     <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
@@ -142,6 +142,7 @@
                                     <h5 class="friend-name"><%=user.username%></h5>
                                     <em class="friend-language"><%=user.language%></em>
                                     <div class="friend-backboard"></div>
+                                    <!--<img src="images/talk/right-arrow.png" class="arrow-right">-->
                                 </a>
                             <% }); %>
                         <%}%>

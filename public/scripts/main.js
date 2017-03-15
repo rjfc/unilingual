@@ -114,7 +114,9 @@ $(".chat-message-input").keypress(function(event) {
 
 // Allows user to open individual chats
 $(".friend").click(function() {
+    $(this).find(".friend-backboard").css("background-color", "#cce5d2");
     var currentChatId = localStorage.getItem("currentChatId");
+    $(".friend[data-userid='" + currentChatId + "'] > .friend-backboard").css("background-color", "");
     $(".chat-div[data-userid='" + currentChatId + "']").hide();
     var friendId = $(this).attr("data-userid");
     $(".chat-div[data-userid='" + friendId + "']").show();

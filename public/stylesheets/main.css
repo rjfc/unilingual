@@ -129,6 +129,7 @@ footer {
     bottom: 50px;
     height: 10px;
     width: 10px;
+    z-index: 2;
 }
 
 .friend {
@@ -136,8 +137,7 @@ footer {
     text-decoration: none;
 }
 
-.pendingFriend {
-
+.pending-friend {
     text-decoration: none;
 }
 
@@ -152,10 +152,20 @@ footer {
 
 .friend-backboard {
     position: absolute;
-    height: 80px;
-    width: 41vh;
-    bottom: 90px;
+    width: 43.1vh;
+    height: 89px;
+    bottom: 83px;
+    opacity: 0.3;
+    left: -20px;
 }
+
+/*.arrow-right {
+    height: 44px;
+    position: relative;
+    left: 345px;
+    bottom: 124px;
+}*/
+
 /*
  Sections
    _____ ______ _____ _______ _____ ____  _   _  _____
@@ -445,6 +455,7 @@ h5 {
     bottom: 100px;
     color: Black;
     margin: 0;
+    z-index: 2;
 }
 
 .friend-language {
@@ -453,6 +464,7 @@ h5 {
     position: relative;
     bottom: 106px;
     left: 102px;
+    z-index: 2;
 }
 
 .chat-friend-name {
@@ -585,6 +597,7 @@ h5 {
     left: 20px;
     bottom: 35px;
     margin-top: -130px;
+    z-index: 2;
 }
 
 .pending-friend-profile-picture {
