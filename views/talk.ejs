@@ -1,4 +1,8 @@
 <% include partials/header %>
+<script>
+        var socket = io();
+        socket.emit('login',{userId:"<%=currentUser.username%>"});
+</script>
 <div class="talk-wrapper">
     <div class="add-friend-popup-wrapper">
         <div class="container">
@@ -175,5 +179,6 @@
         </div>
     </div>
 </div>
+
 <% include partials/footer %>
 

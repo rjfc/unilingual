@@ -135,3 +135,4 @@ $(function() {
         $(".chat-history-div").append($("<li>").text(message));
     });
 });
+
