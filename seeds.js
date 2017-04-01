@@ -4,17 +4,20 @@ var data = [
     {
         username: "r1",
         email:  "123@gmail.com",
-        password: "123"
+        password: "123",
+        status: "Offline"
     },
     {
         username: "r2",
         email:  "123123@gmail.com",
-        password: "123"
+        password: "123",
+        status: "Offline"
     },
     {
         username: "r3",
         email:  "123123123@gmail.com",
-        password: "123"
+        password: "123",
+        status: "Offline"
     }
 ]
 function seedDB(){

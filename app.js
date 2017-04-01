@@ -258,7 +258,8 @@ app.post("/addFriend", function(req, res) {
                 _id: req.user._id.toString(),
                 username: req.user.username,
                 language: req.user.language,
-                profilePicture: req.user.profilePicture
+                profilePicture: req.user.profilePicture,
+                status: req.user.status
             }
         }
     }
@@ -287,7 +288,8 @@ app.post("/acceptFriend", function(req, res) {
                 _id: req.body.globalUserId.toString(),
                 username: req.body.globalUserName,
                 language: req.body.globalUserLanguage,
-                profilePicture: req.body.globalUserProfilePicture
+                profilePicture: req.body.globalUserProfilePicture,
+                status: req.user.status
             }
         },
         $push: {
@@ -297,8 +299,10 @@ app.post("/acceptFriend", function(req, res) {
                         _id: req.body.globalUserId.toString(),
                         username: req.body.globalUserName,
                         language: req.body.globalUserLanguage,
-                        profilePicture: req.body.globalUserProfilePicture}
-                    ],
+                        profilePicture: req.body.globalUserProfilePicture,
+                        status: req.user.status
+                    }
+                ],
                 $sort: {
                     username: 1
                 }
@@ -323,7 +327,8 @@ app.post("/acceptFriend", function(req, res) {
                             _id: req.user._id.toString(),
                             username: req.user.username,
                             language: req.user.language,
-                            profilePicture: req.user.profilePicture
+                            profilePicture: req.user.profilePicture,
+                            status: req.user.status
                         }
                     ],
                     $sort: {
@@ -350,7 +355,11 @@ app.post("/declineFriend", function(req, res) {
         username: req.user.username
     }
     var update =  {
-        $pull: {pendingFriends: {_id: req.body.globalUserId}}
+        $pull: {
+            pendingFriends: {
+                _id: req.body.globalUserId
+            }
+        }
     }
     User.findOneAndUpdate(conditions, update, function(error, doc) {
         if(error) {
@@ -378,6 +387,22 @@ io.on('connection', function(socket){
     console.log("A user connected");
     socket.on("login", function(data){
         console.log("User " + data.userId + " connected");
+        var conditions = {
+            'friends.username': data.userId
+        }
+        var update = {
+                friends: {
+                    $each:[
+                        {
+                            status: 'Online'
+                        }
+                    ]
+                }
+
+        }
+        User.findOneAndUpdate(conditions, update, function (error, doc) {
+
+        });
         users[socket.id] = data.userId;
     });
     socket.on("disconnect", function(){
