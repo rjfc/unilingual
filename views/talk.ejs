@@ -2,6 +2,11 @@
 <script>
         var socket = io();
         socket.emit('login',{userId:"<%=currentUser.username%>"});
+        $("#options-bar-logout").click(function(e) {
+            e.preventDefault()
+            socket.emit('logoff',{userId:"<%=currentUser.username%>"});
+            location.href = $(this).attr("href");
+        });
 </script>
 <div class="talk-wrapper">
     <div class="add-friend-popup-wrapper">

@@ -391,22 +391,41 @@ io.on('connection', function(socket){
             'friends.username': data.userId
         }
         var update = {
-                friends: {
-                    $each:[
-                        {
-                            status: 'Online'
-                        }
-                    ]
-                }
-
+            $set: {
+                'friends.$.status': 'Online'
+            }
         }
         User.findOneAndUpdate(conditions, update, function (error, doc) {
-
+            if(error) {
+                console.log(currentTime + " - FRIEND_ONLINE_STATUS_ERROR: '" + data.userId + "' TRIED TO SET STATUS TO ONLINE");
+                console.log(error);
+            }
+            else {
+                console.log(currentTime + " - FRIEND_ONLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO ONLINE");
+            }
         });
         users[socket.id] = data.userId;
     });
-    socket.on("disconnect", function(){
-        console.log("User " + users[socket.id] + " disconnected");
+    socket.on("logoff", function(data){
+        console.log("User " + data.userId + " connected");
+        var conditions = {
+            'friends.username': data.userId
+        }
+        var update = {
+            $set: {
+                'friends.$.status': 'Offline'
+            }
+        }
+        User.findOneAndUpdate(conditions, update, function (error, doc) {
+            if(error) {
+                console.log(currentTime + " - FRIEND_OFFLINE_STATUS_ERROR: '" + data.userId + "' TRIED TO SET STATUS TO OFFLINE");
+                console.log(error);
+            }
+            else {
+                console.log(currentTime + " - FRIEND_OFFLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO OFFLINE");
+            }
+        });
+        users[socket.id] = data.userId;
     });
 });
 
