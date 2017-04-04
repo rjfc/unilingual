@@ -1,4 +1,10 @@
 <% include partials/header %>
+<%if (currentUser) {%>
+    <script>
+        var socket = io();
+        socket.emit('logoff',{userId:"<%=currentUser.username%>"});
+    </script>
+<%}%>
 <div class="log-in-popup-wrapper">
     <div class="container">
         <div class="row">

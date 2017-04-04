@@ -404,10 +404,27 @@ io.on('connection', function(socket){
                 console.log(currentTime + " - FRIEND_ONLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO ONLINE");
             }
         });
+        var conditions = {
+            'username': data.userId
+        }
+        var update = {
+            $set: {
+                'status': 'Online'
+            }
+        }
+        User.findOneAndUpdate(conditions, update, function (error, doc) {
+            if(error) {
+                console.log(currentTime + " - ONLINE_STATUS_ERROR: '" + data.userId + "' TRIED TO SET STATUS TO ONLINE");
+                console.log(error);
+            }
+            else {
+                console.log(currentTime + " - ONLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO ONLINE");
+            }
+        });
         users[socket.id] = data.userId;
     });
     socket.on("logoff", function(data){
-        console.log("User " + data.userId + " connected");
+        console.log("User " + data.userId + " disconnected");
         var conditions = {
             'friends.username': data.userId
         }
@@ -423,6 +440,23 @@ io.on('connection', function(socket){
             }
             else {
                 console.log(currentTime + " - FRIEND_OFFLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO OFFLINE");
+            }
+        });
+        var conditions = {
+            'username': data.userId
+        }
+        var update = {
+            $set: {
+                'status': 'Offline'
+            }
+        }
+        User.findOneAndUpdate(conditions, update, function (error, doc) {
+            if(error) {
+                console.log(currentTime + " - OFFLINE_STATUS_ERROR: '" + data.userId + "' TRIED TO SET STATUS TO OFFLINE");
+                console.log(error);
+            }
+            else {
+                console.log(currentTime + " - OFFLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO OFFLINE");
             }
         });
         users[socket.id] = data.userId;
