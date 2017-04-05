@@ -2,8 +2,9 @@
 <script>
     var socket = io();
     socket.emit('login',{userId:"<%=currentUser.username%>"});
+    var currentUserUsername = localStorage.getItem("currentUserUsername");
+    localStorage.setItem("currentUserUsername", "<%=currentUser.username%>");
 </script>
-
 <div class="talk-wrapper">
     <div class="add-friend-popup-wrapper">
         <div class="container">
