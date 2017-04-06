@@ -7,6 +7,13 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 }
 
+window.addEventListener("beforeunload", function(e){
+    var currentUserUsername = localStorage.getItem("currentUserUsername");
+    var socket = io();
+    socket.emit('logoff',{userId:currentUserUsername});
+    // Do something
+}, false);
+
 // Submit profile picture form on image choose
 $("#profile-picture-upload-image-input").change(function() {
     $("#form-upload-profile-picture").submit();
