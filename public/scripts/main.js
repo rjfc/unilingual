@@ -150,4 +150,3 @@ $(function() {
         $(".friend-status[data-user='" + user + "']").addClass("offline-user-status");
     });
 });
-

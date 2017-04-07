@@ -19,6 +19,7 @@ Colours
   Pastel Green     | Green    | #98DF6D
   Magic Mint       | Green    | #98F0C8
   Shamrock Light   | Green    | #52CF9E
+  Shamrock Medium  | Green    | #33BC84
   Shamrock         | Green    | #3ECF8E
   Jungle Green     | Green    | #35B67C
   Pickled Bluewood | Blue     | #2C3E50
@@ -744,10 +745,12 @@ h5 {
     background-color: #35B67C;
     margin: auto;
     text-align: center;
+    transition: 0.1s;
 }
 
 #profile-picture-upload-image-label:hover {
     cursor: pointer;
+    background-color: #33BC84;
 }
 
 .chat-message-send {
@@ -1076,4 +1079,3 @@ h5 {
         height: 65px;
     }
 }
-
