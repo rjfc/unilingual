@@ -143,7 +143,7 @@
                         <%if (currentUser.friends.length > 0) {%>
                             <% currentUser.friends.forEach(function(user){ %>
                                 <a class="friend" data-userid="#<%=user._id%>">
-                                    <div class="user-status friend-status"></div>
+                                    <div class="user-status friend-status offline-user-status" data-user="<%=user.username%>"></div>
                                     <img class="friend-profile-picture" src="<%=user.profilePicture%>">
                                     <h5 class="friend-name"><%=user.username%></h5>
                                     <em class="friend-language"><%=user.language%></em>

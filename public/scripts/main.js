@@ -141,5 +141,13 @@ $(function() {
     socket.on("chat message", function(message) {
         $(".chat-history-div").append($("<li>").text(message));
     });
+    socket.on("online", function(user) {
+        $(".friend-status[data-user='" + user + "']").removeClass("offline-user-status");
+        $(".friend-status[data-user='" + user + "']").addClass("online-user-status");
+    });
+    socket.on("offline", function(user) {
+        $(".friend-status[data-user='" + user + "']").removeClass("online-user-status");
+        $(".friend-status[data-user='" + user + "']").addClass("offline-user-status");
+    });
 });
 

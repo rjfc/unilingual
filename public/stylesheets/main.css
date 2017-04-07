@@ -105,7 +105,19 @@ footer {
     border-radius: 50%;
     height: 13px;
     width: 13px;
-    background-color: #98df6d;
+}
+
+.online-user-status {
+    background-color: #98DF6D !important;
+    height: 10px !important;
+    width: 10px !important;
+}
+
+.offline-user-status {
+    background-color: White !important;
+    height: 9px !important;
+    width: 9px !important;
+    border: 1px solid #98DF6D;
 }
 
 
@@ -122,6 +134,7 @@ footer {
 #current-user-status {
     position: relative;
     top: 50px;
+    background-color: #98DF6D;
 }
 
 .friend-status {
