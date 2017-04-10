@@ -1,5 +1,8 @@
 var loginDiv = localStorage.getItem("loginDiv");
 var addFriendDiv = localStorage.getItem("addFriendDiv");
+var onlineUsers = [];
+localStorage.setItem("onlineUsers", JSON.stringify(onlineUsers));
+var storedOnlineUsers = JSON.parse(localStorage.getItem("onlineUsers"));
 
 // Function to check for a valid email
 function isValidEmailAddress(emailAddress) {
@@ -129,6 +132,7 @@ $(".friend").click(function() {
     $(".chat-div[data-userid='" + friendId + "']").show();
     localStorage.setItem("currentChatId", friendId);
 });
+
 
 //---SOCKET.IO---//
 $(function() {

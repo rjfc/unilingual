@@ -5,6 +5,7 @@
     var currentUserUsername = localStorage.getItem("currentUserUsername");
     localStorage.setItem("currentUserUsername", "<%=currentUser.username%>");
 </script>
+
 <div class="talk-wrapper">
     <div class="add-friend-popup-wrapper">
         <div class="container">
@@ -143,7 +144,11 @@
                         <%if (currentUser.friends.length > 0) {%>
                             <% currentUser.friends.forEach(function(user){ %>
                                 <a class="friend" data-userid="#<%=user._id%>">
+                                    <%if (user.status == "Online") { %>
+                                    <div class="user-status friend-status online-user-status" data-user="<%=user.username%>"></div>
+                                    <%} else {%>
                                     <div class="user-status friend-status offline-user-status" data-user="<%=user.username%>"></div>
+                                    <%}%>
                                     <img class="friend-profile-picture" src="<%=user.profilePicture%>">
                                     <h5 class="friend-name"><%=user.username%></h5>
                                     <em class="friend-language"><%=user.language%></em>
