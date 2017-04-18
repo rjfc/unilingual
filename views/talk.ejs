@@ -1,9 +1,21 @@
 <% include partials/header %>
 <script>
-    var socket = io();
-    socket.emit('login',{userId:"<%=currentUser.username%>"});
-    var currentUserUsername = localStorage.getItem("currentUserUsername");
-    localStorage.setItem("currentUserUsername", "<%=currentUser.username%>");
+    $(function() {
+        var socket = io();
+        $("#form-send-message").submit(function () {
+            var messageDetails = {
+                sender: "<%=currentUser.username%>",
+                recipient: $(this).find("textarea").val(),
+                message: $(this).find(".chat-message-input").val()
+            }
+            socket.emit("chat message", messageDetails);
+            $(".chat-message-input").val("");
+            return false;
+        });
+        socket.emit('login', {userId: "<%= currentUser.username %>"});
+        var currentUserUsername = localStorage.getItem("currentUserUsername");
+        localStorage.setItem("currentUserUsername", "<%= currentUser.username %>");
+    });
 </script>
 
 <div class="talk-wrapper">
@@ -170,6 +182,7 @@
                             <a href="#"><img class="image-chat-call" src="images/icons/talk-phone.png"></a>
                             <ul class="chat-history-div"></ul>
                             <form action="" id="form-send-message">
+                                <textarea class="hidden-input"><%=user.username%></textarea>
                                 <div class="row">
                                     <div class="ten columns">
                                         <textarea class="chat-message-input" autocomplete="off"></textarea>

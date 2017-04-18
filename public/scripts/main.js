@@ -133,17 +133,11 @@ $(".friend").click(function() {
     localStorage.setItem("currentChatId", friendId);
 });
 
-
 //---SOCKET.IO---//
 $(function() {
     var socket = io();
-    $("#form-send-message").submit(function() {
-        socket.emit("chat message", $(".chat-message-input").val());
-        $(".chat-message-input").val("");
-        return false;
-    });
     socket.on("chat message", function(message) {
-        $(".chat-history-div").append($("<li>").text(message));
+        $(".chat-history-div").append($("<li>").text(message["sender"] + " - " + message["message"]));
     });
     socket.on("online", function(user) {
         $(".friend-status[data-user='" + user + "']").removeClass("offline-user-status");

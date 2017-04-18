@@ -422,7 +422,7 @@ io.on('connection', function(socket){
             }
         });
         io.emit("online", data.userId);
-        users[socket.id] = data.userId;
+        users[data.userId] = socket.id;
         socket.on('disconnect', function () {
             console.log("User " + data.userId + " disconnected");
             var conditions = {
@@ -460,6 +460,7 @@ io.on('connection', function(socket){
                 }
             });
             io.emit("offline", data.userId);
+            delete users[data.userId];
         });
     });
     socket.on("logoff", function(data){
@@ -499,9 +500,12 @@ io.on('connection', function(socket){
                     console.log(currentTime + " - OFFLINE_STATUS_SUCCESS: '" + data.userId + "' SET STATUS TO OFFLINE");
                 }
             });
-            users[socket.id] = data.userId;
+            delete users[data.userId];
             io.emit("offline", data.userId);
         }
+    });
+    socket.on("chat message", function(msg) {
+        io.emit('chat message', msg);
     });
 });
 
