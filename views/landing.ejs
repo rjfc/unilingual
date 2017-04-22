@@ -1,6 +1,6 @@
 <% include partials/header %>
 <script>
-    var currentUserUsername = localStorage.getItem("currentUserUsername");
+    var currentUserUsername = sessionStorage.getItem("currentUserUsername");
     var socket = io();
     socket.emit('logoff',{userId:currentUserUsername});
 </script>

@@ -13,8 +13,8 @@
             return false;
         });
         socket.emit('login', {userId: "<%= currentUser.username %>"});
-        var currentUserUsername = localStorage.getItem("currentUserUsername");
-        localStorage.setItem("currentUserUsername", "<%= currentUser.username %>");
+        var currentUserUsername = sessionStorage.getItem("currentUserUsername");
+        sessionStorage.setItem("currentUserUsername", "<%= currentUser.username %>");
     });
 </script>
 
