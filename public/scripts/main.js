@@ -137,7 +137,8 @@ $(".friend").click(function() {
 $(function() {
     var socket = io();
     socket.on("chat message", function(message) {
-        $(".chat-history-div").append($("<li>").text(message["sender"] + " - " + message["message"]));
+        $(".chat-history-div").append($("<li>").text(message.message));
+        console.log(message.message);
     });
     socket.on("online", function(user) {
         $(".friend-status[data-user='" + user + "']").removeClass("offline-user-status");

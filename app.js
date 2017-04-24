@@ -505,7 +505,17 @@ io.on('connection', function(socket){
         }
     });
     socket.on("chat message", function(msg) {
-        io.emit('chat message', msg);
+        var roomname;
+        if (msg.recipient > msg.sender) {
+            roomname = msg.sender + "-" + msg.recipient;
+
+        }
+        else {
+            roomname = msg.recipient + "-" + msg.sender;
+        }
+        socket.join(roomname);
+        console.log(roomname);
+        io.to(roomname).emit("chat message", msg);
     });
 });
 
