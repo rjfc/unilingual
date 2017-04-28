@@ -508,14 +508,16 @@ io.on('connection', function(socket){
         var roomname;
         if (msg.recipient > msg.sender) {
             roomname = msg.sender + "-" + msg.recipient;
-
         }
         else {
             roomname = msg.recipient + "-" + msg.sender;
         }
-        socket.join(roomname);
-        console.log(roomname);
-        io.to(roomname).emit("chat message", msg);
+        if(!io.sockets.adapter.rooms[roomname][users[msg.sender]]) {
+            socket.join(roomname);
+        }
+        var clients = io.sockets.adapter.rooms[roomname].sockets;
+        console.log(clients);
+        io.in(roomname).emit("chat message", msg);
     });
 });
 
