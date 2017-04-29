@@ -512,7 +512,7 @@ io.on('connection', function(socket){
         else {
             roomname = msg.recipient + "-" + msg.sender;
         }
-        if(!io.sockets.adapter.rooms[roomname][users[msg.sender]]) {
+        if(!io.sockets.adapter.sids[users[msg.sender]][roomname]) {
             socket.join(roomname);
         }
         var clients = io.sockets.adapter.rooms[roomname].sockets;

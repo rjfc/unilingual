@@ -130,17 +130,18 @@ $(".friend").click(function() {
     $(".chat-div[data-userid='" + currentChatId + "']").hide();
     var friendId = $(this).attr("data-userid");
     $(".chat-div[data-userid='" + friendId + "']").show();
-    localStorage.setItem("currentChatId", friendId);
+    localStorage.setItesm("currentChatId", friendId);
 });
 
 //---SOCKET.IO---//
 $(function() {
     var socket = io();
     socket.on("chat message", function(msg) {
-        console.log("received message");
+        alert("received message");
         console.log(msg[message]);
-        $(".chat-history-div").append($("<li>").text(msg.message));
-        console.log(msg.message);
+        if (msg[message] != "") {
+            $(".chat-history-div").append($("<li>").text(msg.message));
+        }
     });
     socket.on("online", function(user) {
         $(".friend-status[data-user='" + user + "']").removeClass("offline-user-status");
