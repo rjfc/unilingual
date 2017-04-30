@@ -512,12 +512,18 @@ io.on('connection', function(socket){
         else {
             roomname = msg.recipient + "-" + msg.sender;
         }
-        if(!io.sockets.adapter.sids[users[msg.sender]][roomname]) {
-            socket.join(roomname);
+
+        if (!io.sockets.adapter.sids[users[msg.sender]][roomname]) {
+            socket.join(roomname, function(){
+                console.log("Joined " + roomname);
+                io.in(roomname).emit("chat message", msg);
+            });
+        } else {
+//Already joined, just send message
+            io.in(roomname).emit("chat message", msg);
         }
         var clients = io.sockets.adapter.rooms[roomname].sockets;
         console.log(clients);
-        io.in(roomname).emit("chat message", msg);
     });
 });
 

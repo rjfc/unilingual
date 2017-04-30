@@ -130,25 +130,20 @@ $(".friend").click(function() {
     $(".chat-div[data-userid='" + currentChatId + "']").hide();
     var friendId = $(this).attr("data-userid");
     $(".chat-div[data-userid='" + friendId + "']").show();
-    localStorage.setItesm("currentChatId", friendId);
+    localStorage.setItem("currentChatId", friendId);
 });
 
-//---SOCKET.IO---//
-$(function() {
-    var socket = io();
-    socket.on("chat message", function(msg) {
-        alert("received message");
-        console.log(msg[message]);
-        if (msg[message] != "") {
-            $(".chat-history-div").append($("<li>").text(msg.message));
+/* //GLOBAL SOCKET//
+(function(){
+    var that;
+    window.Unilingual = {
+        init: function(){
+            that = this;
+            this.startSocket();
+        },
+        startSocket: function(){
+            this.socket = io();
         }
-    });
-    socket.on("online", function(user) {
-        $(".friend-status[data-user='" + user + "']").removeClass("offline-user-status");
-        $(".friend-status[data-user='" + user + "']").addClass("online-user-status");
-    });
-    socket.on("offline", function(user) {
-        $(".friend-status[data-user='" + user + "']").removeClass("online-user-status");
-        $(".friend-status[data-user='" + user + "']").addClass("offline-user-status");
-    });
-});
+    }.init();
+})();
+*/

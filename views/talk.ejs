@@ -1,5 +1,6 @@
 <% include partials/header %>
 <script>
+    //---SOCKET.IO---//
     $(function() {
         var socket = io();
         $("#form-send-message").submit(function () {
@@ -12,9 +13,25 @@
             $(".chat-message-input").val("");
             return false;
         });
+
+        socket.on("chat message", function(msg) {
+            if (msg.message != "") {
+                $(".chat-history-div").append($("<li>").text(msg.message));
+            }
+        });
+
         socket.emit('login', {userId: "<%= currentUser.username %>"});
         var currentUserUsername = sessionStorage.getItem("currentUserUsername");
         sessionStorage.setItem("currentUserUsername", "<%= currentUser.username %>");
+
+        socket.on("online", function(user) {
+            $(".friend-status[data-user='" + user + "']").removeClass("offline-user-status");
+            $(".friend-status[data-user='" + user + "']").addClass("online-user-status");
+        });
+        socket.on("offline", function(user) {
+            $(".friend-status[data-user='" + user + "']").removeClass("online-user-status");
+            $(".friend-status[data-user='" + user + "']").addClass("offline-user-status");
+        });
     });
 </script>
 
