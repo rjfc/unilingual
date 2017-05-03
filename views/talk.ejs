@@ -22,7 +22,9 @@
                 else {
                     $(".chat-history-div").append($("<br><strong style='color: #555555'>").text(msg.sender + ": "));
                 }
+                var time = new Date();
                 $(".chat-history-div").append($("<span>").text(msg.message));
+                $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()));
             }
         });
 
