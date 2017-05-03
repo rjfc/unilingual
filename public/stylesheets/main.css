@@ -280,7 +280,9 @@ footer {
 }
 
 .chat-history-div {
+    font-family: 'Lato', sans-serif;
     position: relative;
+    font-size: 110%;
     height: 67.5%;
     width: 88%;
     background-color: #F8F8F8;
@@ -289,6 +291,7 @@ footer {
     padding: 10px 20px 10px 20px;
     bottom: 160px;
     margin-bottom: 0;
+    overflow-y: auto;
 }
 
 .chat-message-input {

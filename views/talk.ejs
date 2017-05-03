@@ -16,7 +16,13 @@
 
         socket.on("chat message", function(msg) {
             if (msg.message != "") {
-                $(".chat-history-div").append($("<li>").text(msg.message));
+                if (msg.sender == "<%=currentUser.username%>") {
+                    $(".chat-history-div").append($("<br><strong style='color: #33BC84'>").text(msg.sender + ": "));
+                }
+                else {
+                    $(".chat-history-div").append($("<br><strong style='color: #555555'>").text(msg.sender + ": "));
+                }
+                $(".chat-history-div").append($("<span>").text(msg.message));
             }
         });
 
