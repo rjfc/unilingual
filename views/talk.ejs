@@ -25,11 +25,31 @@
                 var time = new Date();
                 $(".chat-history-div").append($("<span>").text(msg.message));
                 if (time.getHours() > 12) {
-                    $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + time.getMinutes() + " PM"));
+                    if (time.getMinutes().toString().length == 1) {
+                        $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + 0 + time.getMinutes() + " PM"));
+                    }
+                    else {
+                        $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + time.getMinutes() + " PM"));
+                    }
+                }
+                else if (time.getHours() == 0) {
+                    if (time.getMinutes().toString().length == 1) {
+                        $(".chat-history-div").append($("<span style='float: right'>").text(12 + ":" + 0 + time.getMinutes() + " AM"));
+                    }
+                    else {
+                        $(".chat-history-div").append($("<span style='float: right'>").text(12 + ":" + time.getMinutes() + " AM"));
+                    }
                 }
                 else {
-                    $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() + ":" + time.getMinutes() ));
+                    $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() + ":" + time.getMinutes()));
+                    if (time.getMinutes().toString().length == 1) {
+                        $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() + ":" + 0 + time.getMinutes()));
+                    }
+                    else {
+                        $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + 0 + time.getMinutes()));
+                    }
                 }
+                $(".chat-history-div").append($("<hr style='margin: 0'>"));
             }
         });
 
@@ -210,7 +230,7 @@
                             <img class="chat-friend-profile-picture" src="<%=user.profilePicture%>">
                             <h2 class="chat-friend-name"><strong><%=user.username%> - </strong><em><%=user.language%></em></h2>
                             <a href="#"><img class="image-chat-call" src="images/icons/talk-phone.png"></a>
-                            <ul class="chat-history-div"></ul>
+                            <div class="chat-history-div"></div>
                             <form action="" id="form-send-message">
                                 <textarea class="hidden-input"><%=user.username%></textarea>
                                 <div class="row">
