@@ -24,7 +24,12 @@
                 }
                 var time = new Date();
                 $(".chat-history-div").append($("<span>").text(msg.message));
-                $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()));
+                if (time.getHours() > 12) {
+                    $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + time.getMinutes() + " PM"));
+                }
+                else {
+                    $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() + ":" + time.getMinutes() ));
+                }
             }
         });
 
