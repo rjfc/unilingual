@@ -73,51 +73,28 @@
     <div class="choose-language-popup-wrapper">
         <div class="container">
             <div class="row">
-                <div class="four columns">
-                    <form action="/changeLanguage" method="POST" id="form-set-language-dutch">
-                        <label name="language" onclick="document.getElementById('form-set-language-dutch').submit();">Dutch</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-english">
-                        <label name="language" onclick="document.getElementById('form-set-language-english').submit();">English</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-spanish">
-                        <label name="language" onclick="document.getElementById('form-set-language-spanish').submit();">Spanish</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-french">
-                        <label name="language" onclick="document.getElementById('form-set-language-french').submit();">French</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-indonesian">
-                        <label name="language" onclick="document.getElementById('form-set-language-indonesian').submit();">Indonesian</label>
-                    </form>
-                </div>
-                <div class="four columns">
-                    <form action="/changeLanguage" method="POST" id="form-set-language-italian">
-                        <label name="language" onclick="document.getElementById('form-set-language-italian').submit();">Italian</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-japanese">
-                        <label name="language" onclick="document.getElementById('form-set-language-japanese').submit();">Japanese</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-korean">
-                        <label name="language" onclick="document.getElementById('form-set-language-korean').submit();">Korean</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-polish">
-                        <label name="language" onclick="document.getElementById('form-set-language-polish').submit();">Polish</label>
-                    </form>
-                </div>
-                <div class="four columns">
-                    <form action="/changeLanguage" method="POST" id="form-set-language-portuguese">
-                        <label name="language" onclick="document.getElementById('form-set-language-portuguese').submit();">Portuguese</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-russian">
-                        <label name="language" onclick="document.getElementById('form-set-language-russian').submit();">Russian</label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-chinese-simplified">
-                        <label name="language" onclick="document.getElementById('form-set-language-chinese-simplified').submit();">Chinese <span style="font-size: 10px;">(Simplified)</span></label><br>
-                    </form>
-                    <form action="/changeLanguage" method="POST" id="form-set-language-chinese-traditional">
-                        <label name="language" onclick="document.getElementById('form-set-language-chinese-traditional').submit();">Chinese <span style="font-size: 10px;">(Traditional)</span></label>
-                    </form>
-                </div>
+                <form action="/changeLanguage" method="POST" id="form-set-language">
+                    <div class="four columns">
+                        <label name="language">Dutch</label><br>
+                        <label name="language">English</label><br>
+                        <label name="language">Spanish</label><br>
+                        <label name="language">French</label><br>
+                        <label name="language">Indonesian</label>
+                    </div>
+                    <div class="four columns">
+                        <label name="language">Italian</label><br>
+                        <label name="language">Japanese</label><br>
+                        <label name="language">Korean</label><br>
+                        <label name="language">Polish</label>
+                    </div>
+                    <div class="four columns">
+                        <label name="language">Portuguese</label><br>
+                        <label name="language">Russian</label><br>
+                        <label name="language">Chinese <span style="font-size: 10px;">(Simplified)</span></label><br>
+                        <label name="language">Chinese <span style="font-size: 10px;">(Traditional)</span></label>
+                    </div>
+                    <textarea class="hidden-input" name="language" id="form-set-language-language"></textarea>
+                </form>
             </div>
         </div>
     </div>

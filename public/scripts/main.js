@@ -146,13 +146,17 @@ $(document).click(function(e){
     }
 });
 
+// Toggle language selection menu on current user language button click
 $("#current-user-language").click(function() {
-    if ($(".choose-language-popup-wrapper").is(":visible")) {
-        $(".choose-language-popup-wrapper").hide();
-    }
-    else {
-        $(".choose-language-popup-wrapper").show();
-    }
+    $(".choose-language-popup-wrapper").toggle();
+});
+
+// Submit form on language select
+
+$("#form-set-language label").click(function() {
+    var language = $(this).text();
+    $("#form-set-language textarea").text(language);
+    $("#form-set-language").submit();
 });
 
 /* //GLOBAL SOCKET//
