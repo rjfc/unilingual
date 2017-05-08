@@ -133,6 +133,28 @@ $(".friend").click(function() {
     localStorage.setItem("currentChatId", friendId);
 });
 
+// Clicking anywhere to close language selection
+$(document).click(function(e){
+    if ($(".choose-language-popup-wrapper").is(":visible")) {
+        if($(e.target).closest(".choose-language-popup-wrapper").length > 0) {
+            return false;
+        }
+        else if ($(e.target).closest("#current-user-language").length > 0) {
+            return false;
+        }
+        $(".choose-language-popup-wrapper").hide();
+    }
+});
+
+$("#current-user-language").click(function() {
+    if ($(".choose-language-popup-wrapper").is(":visible")) {
+        $(".choose-language-popup-wrapper").hide();
+    }
+    else {
+        $(".choose-language-popup-wrapper").show();
+    }
+});
+
 /* //GLOBAL SOCKET//
 (function(){
     var that;

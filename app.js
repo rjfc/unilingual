@@ -373,6 +373,11 @@ app.post("/declineFriend", function(req, res) {
     });
 });
 
+// POST ROUTE: Change language
+app.post("/changeLanguage", function(req, res) {
+
+});
+
 // Middleware to check if user is logged in
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()) {
@@ -519,7 +524,7 @@ io.on('connection', function(socket){
                 io.in(roomname).emit("chat message", msg);
             });
         } else {
-//Already joined, just send message
+            //Already joined, just send message
             io.in(roomname).emit("chat message", msg);
         }
         var clients = io.sockets.adapter.rooms[roomname].sockets;

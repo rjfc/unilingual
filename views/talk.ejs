@@ -14,6 +14,7 @@
             return false;
         });
 
+        // Chat message appendage
         socket.on("chat message", function(msg) {
             if (msg.message != "") {
                 if (msg.sender == "<%=currentUser.username%>") {
@@ -49,7 +50,7 @@
                         $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + 0 + time.getMinutes()));
                     }
                 }
-                $(".chat-history-div").append($("<hr style='margin: 0'>"));
+                $(".chat-history-div").append($("<hr style='margin: -15px; padding: 0px'>"));
             }
         });
 
@@ -69,6 +70,57 @@
 </script>
 
 <div class="talk-wrapper">
+    <div class="choose-language-popup-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="four columns">
+                    <form action="/changeLanguage" method="POST" id="form-set-language-dutch">
+                        <label name="language" onclick="document.getElementById('form-set-language-dutch').submit();">Dutch</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-english">
+                        <label name="language" onclick="document.getElementById('form-set-language-english').submit();">English</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-spanish">
+                        <label name="language" onclick="document.getElementById('form-set-language-spanish').submit();">Spanish</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-french">
+                        <label name="language" onclick="document.getElementById('form-set-language-french').submit();">French</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-indonesian">
+                        <label name="language" onclick="document.getElementById('form-set-language-indonesian').submit();">Indonesian</label>
+                    </form>
+                </div>
+                <div class="four columns">
+                    <form action="/changeLanguage" method="POST" id="form-set-language-italian">
+                        <label name="language" onclick="document.getElementById('form-set-language-italian').submit();">Italian</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-japanese">
+                        <label name="language" onclick="document.getElementById('form-set-language-japanese').submit();">Japanese</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-korean">
+                        <label name="language" onclick="document.getElementById('form-set-language-korean').submit();">Korean</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-polish">
+                        <label name="language" onclick="document.getElementById('form-set-language-polish').submit();">Polish</label>
+                    </form>
+                </div>
+                <div class="four columns">
+                    <form action="/changeLanguage" method="POST" id="form-set-language-portuguese">
+                        <label name="language" onclick="document.getElementById('form-set-language-portuguese').submit();">Portuguese</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-russian">
+                        <label name="language" onclick="document.getElementById('form-set-language-russian').submit();">Russian</label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-chinese-simplified">
+                        <label name="language" onclick="document.getElementById('form-set-language-chinese-simplified').submit();">Chinese <span style="font-size: 10px;">(Simplified)</span></label><br>
+                    </form>
+                    <form action="/changeLanguage" method="POST" id="form-set-language-chinese-traditional">
+                        <label name="language" onclick="document.getElementById('form-set-language-chinese-traditional').submit();">Chinese <span style="font-size: 10px;">(Traditional)</span></label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="add-friend-popup-wrapper">
         <div class="container">
             <div class="row">

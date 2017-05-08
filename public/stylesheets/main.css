@@ -312,6 +312,22 @@ footer {
     border: 1px solid #52CF9E;
 }
 
+.choose-language-popup-wrapper {
+    height: 127px;
+    width: 440px;
+    left: 103px;
+    top: 145px;
+    position: absolute;
+    z-index: 1;
+    background-color: #33BC84;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    padding-top: 17px;
+    display: none;
+    box-shadow: 1px 1px 10px #888888;
+}
+
+
 .add-friend-popup-wrapper {
     position: fixed;
     z-index: 10;
@@ -526,6 +542,18 @@ h5 {
     bottom: 124px;
     left: 102px;
 }
+
+.choose-language-popup-wrapper label {
+    color: Black !important;
+    display: inline-block;
+    margin: 0;
+}
+
+.choose-language-popup-wrapper label:hover {
+    font-weight: Bold;
+    cursor: pointer;
+}
+
 
 /*
  Images
@@ -828,6 +856,11 @@ h5 {
 
 .form-add-friend {
     margin-top: -20px;
+}
+
+.choose-language-popup-wrapper form {
+    margin: 0;
+    padding: 0;
 }
 
 /*
