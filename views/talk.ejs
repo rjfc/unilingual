@@ -50,7 +50,6 @@
                         $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + 0 + time.getMinutes()));
                     }
                 }
-                $(".chat-history-div").append($("<hr style='margin: -15px; padding: 0px'>"));
             }
         });
 
@@ -197,7 +196,7 @@
                         <%if (currentUser)  {%>
                             <a href="#" id="current-user-profile-picture"><img id="image-current-user-profile-picture" src="<%=currentUser.profilePicture%>"></a>
                             <h4 id="current-user-name"><%=currentUser.username%></h4>
-                            <a id="current-user-language" href="#"><em><%=currentUser.language%></em> v</a>
+                            <a id="current-user-language" href="#"><em><%=currentUser.language%></em> ▼</a>
                         <%}%>
                         <a id="add-friend-button" href="#"><img id="image-add-user" src="/images/icons/add-user.png"></a>
                         <br>

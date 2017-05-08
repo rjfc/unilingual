@@ -375,7 +375,23 @@ app.post("/declineFriend", function(req, res) {
 
 // POST ROUTE: Change language
 app.post("/changeLanguage", function(req, res) {
-
+    var setLanguage = req.body.language;
+    var conditions = {
+        username: req.user.username
+    }
+    var update =  {
+        language: setLanguage
+    }
+    User.findOneAndUpdate(conditions, update, function(error, doc) {
+        if(error) {
+            console.log(currentTime + " - USER_CHANGE_LANGUAGE_ERROR: '" + req.user.username + "' TRIED TO SET LANGUAGE TO '" + setLanguage + "'");
+            console.log(error);
+        }
+        else {
+            console.log(currentTime + " - USER_CHANGE_LANGUAGE_SUCCESS: '" + req.user.username + "' SET LANGUAGE TO '" + setLanguage + "'");
+        }
+        res.redirect("/talk");
+    });
 });
 
 // Middleware to check if user is logged in
