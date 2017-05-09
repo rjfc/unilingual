@@ -9,6 +9,7 @@ var express          = require("express"),
     multer           = require("multer"),
     mongoose         = require("mongoose")
     passport         = require("passport"),
+    translate        = require("google-translate-api"),
     bodyParser       = require("body-parser"),
     expressSession   = require("express-session"),
     LocalStrategy    = require("passport-local").Strategy,
@@ -526,7 +527,98 @@ io.on('connection', function(socket){
         }
     });
     socket.on("chat message", function(msg) {
-        var roomname;
+        var roomname, languageSender, languageRecipient = null, languageCodeSender, languageCodeRecipient;
+        languageSender = msg.language;
+
+        // Find recipient language
+        User.findOne({username: msg.recipient}, function(err, user) {
+            languageRecipient = user.language;
+        });
+
+        switch (languageSender) {
+            case "Dutch":
+                languageCodeSender = "nl";
+                break;
+            case "English":
+                languageCodeSender = "en";
+                break;
+            case "Spanish":
+                languageCodeSender = "es";
+                break;
+            case "French":
+                languageCodeSender = "fr";
+                break;
+            case "Indonesian":
+                languageCodeSender = "id";
+                break;
+            case "Italian":
+                languageCodeSender = "it";
+                break;
+            case "Japanese":
+                languageCodeSender = "ja";
+                break;
+            case "Korean":
+                languageCodeSender = "ko";
+                break;
+            case "Polish":
+                languageCodeSender = "pl";
+                break;
+            case "Portuguese":
+                languageCodeSender = "pt";
+                break;
+            case "Russian":
+                languageCodeSender = "ru";
+                break;
+            case "Chinese (Simplified)":
+                languageCodeSender = "zh-cn";
+                break;
+            case "Chinese (Traditional)":
+                languageCodeSender = "zn-tw";
+                break;
+        }
+
+        switch (languageRecipient) {
+            case "Dutch":
+                languageCodeRecipient = "nl";
+                break;
+            case "English":
+                languageCodeRecipient = "en";
+                break;
+            case "Spanish":
+                languageCodeRecipient = "es";
+                break;
+            case "French":
+                languageCodeRecipient = "fr";
+                break;
+            case "Indonesian":
+                languageCodeRecipient = "id";
+                break;
+            case "Italian":
+                languageCodeRecipient = "it";
+                break;
+            case "Japanese":
+                languageCodeRecipient = "ja";
+                break;
+            case "Korean":
+                languageCodeRecipient = "ko";
+                break;
+            case "Polish":
+                languageCodeRecipient = "pl";
+                break;
+            case "Portuguese":
+                languageCodeRecipient = "pt";
+                break;
+            case "Russian":
+                languageCodeRecipient = "ru";
+                break;
+            case "Chinese (Simplified)":
+                languageCodeRecipient = "zh-cn";
+                break;
+            case "Chinese (Traditional)":
+                languageCodeRecipient = "zn-tw";
+                break;
+        }
+
         if (msg.recipient > msg.sender) {
             roomname = msg.sender + "-" + msg.recipient;
         }

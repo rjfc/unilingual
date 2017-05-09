@@ -7,6 +7,7 @@
             var messageDetails = {
                 sender: "<%=currentUser.username%>",
                 recipient: $(this).find("textarea").val(),
+                language: "<%=currentUser.language%>",
                 message: $(this).find(".chat-message-input").val()
             }
             socket.emit("chat message", messageDetails);
