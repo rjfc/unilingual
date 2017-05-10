@@ -152,7 +152,6 @@ $("#current-user-language").click(function() {
 });
 
 // Submit form on language select
-
 $("#form-set-language label").click(function() {
     var language = $(this).text();
     $("#form-set-language textarea").text(language);

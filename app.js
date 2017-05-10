@@ -527,13 +527,16 @@ io.on('connection', function(socket){
         }
     });
     socket.on("chat message", function(msg) {
-        var roomname, languageSender, languageRecipient = null, languageCodeSender, languageCodeRecipient;
+        var roomname, languageSender, languageRecipient, languageCodeSender, languageCodeRecipient;
         languageSender = msg.language;
 
         // Find recipient language
         User.findOne({username: msg.recipient}, function(err, user) {
             languageRecipient = user.language;
+            console.log(user.language);
         });
+
+        console.log(languageRecipient);
 
         switch (languageSender) {
             case "Dutch":
@@ -619,6 +622,14 @@ io.on('connection', function(socket){
                 break;
         }
 
+        translate(msg.message, {from: languageCodeSender, to: languageCodeRecipient}).then(res => {
+            msg.message = res.text;
+        }).catch(err => {
+                console.error(err);
+        });
+
+        console.log("Language code sender: " + languageCodeSender);
+        console.log("Language code recipient: " + languageCodeRecipient);
         if (msg.recipient > msg.sender) {
             roomname = msg.sender + "-" + msg.recipient;
         }
