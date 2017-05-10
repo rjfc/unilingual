@@ -527,127 +527,127 @@ io.on('connection', function(socket){
         }
     });
     socket.on("chat message", function(msg) {
-        var roomname, languageSender, languageRecipient, languageCodeSender, languageCodeRecipient;
+        var roomname, languageSender, languageRecipient, languageCodeSender, languageCodeRecipient, translatedMessage;
         languageSender = msg.language;
 
         // Find recipient language
         User.findOne({username: msg.recipient}, function(err, user) {
+            sendMessage(user);
+        });
+
+        function sendMessage(user) {
             languageRecipient = user.language;
-            console.log(user.language);
-        });
+            switch (languageRecipient) {
+                case "Dutch":
+                    languageCodeRecipient = "nl";
+                    break;
+                case "English":
+                    languageCodeRecipient = "en";
+                    break;
+                case "Spanish":
+                    languageCodeRecipient = "es";
+                    break;
+                case "French":
+                    languageCodeRecipient = "fr";
+                    break;
+                case "Indonesian":
+                    languageCodeRecipient = "id";
+                    break;
+                case "Italian":
+                    languageCodeRecipient = "it";
+                    break;
+                case "Japanese":
+                    languageCodeRecipient = "ja";
+                    break;
+                case "Korean":
+                    languageCodeRecipient = "ko";
+                    break;
+                case "Polish":
+                    languageCodeRecipient = "pl";
+                    break;
+                case "Portuguese":
+                    languageCodeRecipient = "pt";
+                    break;
+                case "Russian":
+                    languageCodeRecipient = "ru";
+                    break;
+                case "Chinese (Simplified)":
+                    languageCodeRecipient = "zh-cn";
+                    break;
+                case "Chinese (Traditional)":
+                    languageCodeRecipient = "zn-tw";
+                    break;
+            }
 
-        console.log(languageRecipient);
+            switch (languageSender) {
+                case "Dutch":
+                    languageCodeSender = "nl";
+                    break;
+                case "English":
+                    languageCodeSender = "en";
+                    break;
+                case "Spanish":
+                    languageCodeSender = "es";
+                    break;
+                case "French":
+                    languageCodeSender = "fr";
+                    break;
+                case "Indonesian":
+                    languageCodeSender = "id";
+                    break;
+                case "Italian":
+                    languageCodeSender = "it";
+                    break;
+                case "Japanese":
+                    languageCodeSender = "ja";
+                    break;
+                case "Korean":
+                    languageCodeSender = "ko";
+                    break;
+                case "Polish":
+                    languageCodeSender = "pl";
+                    break;
+                case "Portuguese":
+                    languageCodeSender = "pt";
+                    break;
+                case "Russian":
+                    languageCodeSender = "ru";
+                    break;
+                case "Chinese (Simplified)":
+                    languageCodeSender = "zh-cn";
+                    break;
+                case "Chinese (Traditional)":
+                    languageCodeSender = "zn-tw";
+                    break;
+            }
 
-        switch (languageSender) {
-            case "Dutch":
-                languageCodeSender = "nl";
-                break;
-            case "English":
-                languageCodeSender = "en";
-                break;
-            case "Spanish":
-                languageCodeSender = "es";
-                break;
-            case "French":
-                languageCodeSender = "fr";
-                break;
-            case "Indonesian":
-                languageCodeSender = "id";
-                break;
-            case "Italian":
-                languageCodeSender = "it";
-                break;
-            case "Japanese":
-                languageCodeSender = "ja";
-                break;
-            case "Korean":
-                languageCodeSender = "ko";
-                break;
-            case "Polish":
-                languageCodeSender = "pl";
-                break;
-            case "Portuguese":
-                languageCodeSender = "pt";
-                break;
-            case "Russian":
-                languageCodeSender = "ru";
-                break;
-            case "Chinese (Simplified)":
-                languageCodeSender = "zh-cn";
-                break;
-            case "Chinese (Traditional)":
-                languageCodeSender = "zn-tw";
-                break;
-        }
-
-        switch (languageRecipient) {
-            case "Dutch":
-                languageCodeRecipient = "nl";
-                break;
-            case "English":
-                languageCodeRecipient = "en";
-                break;
-            case "Spanish":
-                languageCodeRecipient = "es";
-                break;
-            case "French":
-                languageCodeRecipient = "fr";
-                break;
-            case "Indonesian":
-                languageCodeRecipient = "id";
-                break;
-            case "Italian":
-                languageCodeRecipient = "it";
-                break;
-            case "Japanese":
-                languageCodeRecipient = "ja";
-                break;
-            case "Korean":
-                languageCodeRecipient = "ko";
-                break;
-            case "Polish":
-                languageCodeRecipient = "pl";
-                break;
-            case "Portuguese":
-                languageCodeRecipient = "pt";
-                break;
-            case "Russian":
-                languageCodeRecipient = "ru";
-                break;
-            case "Chinese (Simplified)":
-                languageCodeRecipient = "zh-cn";
-                break;
-            case "Chinese (Traditional)":
-                languageCodeRecipient = "zn-tw";
-                break;
-        }
-
-        translate(msg.message, {from: languageCodeSender, to: languageCodeRecipient}).then(res => {
-            msg.message = res.text;
-        }).catch(err => {
-                console.error(err);
-        });
-
-        console.log("Language code sender: " + languageCodeSender);
-        console.log("Language code recipient: " + languageCodeRecipient);
-        if (msg.recipient > msg.sender) {
-            roomname = msg.sender + "-" + msg.recipient;
-        }
-        else {
-            roomname = msg.recipient + "-" + msg.sender;
-        }
-
-        if (!io.sockets.adapter.sids[users[msg.sender]][roomname]) {
-            socket.join(roomname, function(){
-                console.log("Joined " + roomname);
-                io.in(roomname).emit("chat message", msg);
+            translate(msg.message, {from: languageCodeSender, to: languageCodeRecipient}).then(res => {
+                console.log(res.text);
+            }).catch(err => {
+                    console.error(err);
             });
-        } else {
-            //Already joined, just send message
-            io.in(roomname).emit("chat message", msg);
+            
+            console.log("Language code sender: " + languageCodeSender);
+            console.log("Language code recipient: " + languageCodeRecipient);
+            if (msg.recipient > msg.sender) {
+                roomname = msg.sender + "-" + msg.recipient;
+            }
+            else {
+                roomname = msg.recipient + "-" + msg.sender;
+            }
+
+            if (!io.sockets.adapter.sids[users[msg.sender]][roomname]) {
+                socket.join(roomname, function(){
+                    console.log("Joined " + roomname);
+                    io.in(roomname).emit("chat message", msg);
+                });
+            } else {
+                //Already joined, just send message
+                io.in(roomname).emit("chat message", msg);
+            }
+            var clients = io.sockets.adapter.rooms[roomname].sockets;
+            console.log(clients);
         }
-        var clients = io.sockets.adapter.rooms[roomname].sockets;
-        console.log(clients);
     });
 });
 
