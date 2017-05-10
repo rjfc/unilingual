@@ -8,7 +8,8 @@
                 sender: "<%=currentUser.username%>",
                 recipient: $(this).find("textarea").val(),
                 language: "<%=currentUser.language%>",
-                message: $(this).find(".chat-message-input").val()
+                message: $(this).find(".chat-message-input").val(),
+                translated: null
             }
             socket.emit("chat message", messageDetails);
             $(".chat-message-input").val("");
@@ -20,12 +21,14 @@
             if (msg.message != "") {
                 if (msg.sender == "<%=currentUser.username%>") {
                     $(".chat-history-div").append($("<br><strong style='color: #33BC84'>").text(msg.sender + ": "));
+                    $(".chat-history-div").append($("<span>").text(msg.message));
                 }
                 else {
                     $(".chat-history-div").append($("<br><strong style='color: #555555'>").text(msg.sender + ": "));
+                    $(".chat-history-div").append($("<span>").text(msg.translated));
                 }
                 var time = new Date();
-                $(".chat-history-div").append($("<span>").text(msg.message));
+
                 if (time.getHours() > 12) {
                     if (time.getMinutes().toString().length == 1) {
                         $(".chat-history-div").append($("<span style='float: right'>").text(time.getHours() % 12 + ":" + 0 + time.getMinutes() + " PM"));

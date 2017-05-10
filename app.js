@@ -9,7 +9,7 @@ var express          = require("express"),
     multer           = require("multer"),
     mongoose         = require("mongoose")
     passport         = require("passport"),
-    translate        = require("google-translate-api"),
+    translate        = require('node-google-translate-skidz'),
     bodyParser       = require("body-parser"),
     expressSession   = require("express-session"),
     LocalStrategy    = require("passport-local").Strategy,
@@ -621,12 +621,14 @@ io.on('connection', function(socket){
                     break;
             }
 
-            translate(msg.message, {from: languageCodeSender, to: languageCodeRecipient}).then(res => {
-                console.log(res.text);
-            }).catch(err => {
-                    console.error(err);
-            });
-            
+            translate({
+                text: msg.message,
+                source: languageCodeSender,
+                target: languageCodeRecipient
+            }, function(result) {
+            msg.translated = result.translation;
+            console.log(msg.translated);
+
             console.log("Language code sender: " + languageCodeSender);
             console.log("Language code recipient: " + languageCodeRecipient);
             if (msg.recipient > msg.sender) {
@@ -647,6 +649,7 @@ io.on('connection', function(socket){
             }
             var clients = io.sockets.adapter.rooms[roomname].sockets;
             console.log(clients);
+            });
         }
     });
 });
