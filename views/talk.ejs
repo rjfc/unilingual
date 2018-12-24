@@ -16,6 +16,22 @@
             return false;
         });
 
+        // Allows user to open individual chats
+        $(".friend").click(function() {
+            $(this).find(".friend-backboard").css("background-color", "#cce5d2");
+            var currentChatId = localStorage.getItem("currentChatId");
+            $(".friend[data-userid='" + currentChatId + "'] > .friend-backboard").css("background-color", "");
+            $(".chat-div[data-userid='" + currentChatId + "']").hide();
+            var friendId = $(this).attr("data-userid");
+            $(".chat-div[data-userid='" + friendId + "']").show();
+            localStorage.setItem("currentChatId", friendId);
+            var data = {
+                sender: "<%=currentUser.username%>",
+                recipient: $(this).find(".friend-name").text()
+            };
+            socket.emit("join room", data);
+        });
+
         // Chat message appendage
         socket.on("chat message", function(msg) {
             if (msg.message != "") {
@@ -179,12 +195,12 @@
                     <div class="one column">
                         <a href="#"><img src="images/unilingual-logo-text.png" id="image-options-bar-unilingual-logo"></a>
                     </div>
-                    <div class="one column">
+                   <!-- <div class="one column">
                         <a class="options-bar-text">Options</a>
                     </div>
                     <div class="one column">
                         <a class="options-bar-text">Help</a>
-                    </div>
+                    </div>-->
                     <div class="one column">
                         <a class="options-bar-text" id="options-bar-logout" href="/logout">Log Out</a>
                     </div>
@@ -206,7 +222,8 @@
                         <br>
                         <br>
                         <hr style="margin: 0; position:relative; bottom: 90px;">
-                        <input id="input-search-friends-list" type="text" placeholder="Search friends list">
+                        <!--<input id="input-search-friends-list" type="text" placeholder="Search friends list">-->
+                        <h6 id="hint-refresh-page">Refresh the page to see pending/accepted friend requests!</h6>
                         <hr style="margin: 0; position:relative; bottom: 110px;">
                     </div>
                     <%if (currentUser.pendingFriends.length > 0) {%>
@@ -218,7 +235,7 @@
                                 <form action="/acceptFriend" method="POST" class="form-accept-friend-request" id="form-accept-<%=user.username%>-request">
                                     <textarea class="hidden-input" name="globalUserId"><%=user._id%></textarea>
                                     <textarea class="hidden-input" name="globalUserName"><%=user.username%></textarea>
-                                    <textarea class="hidden-input" name="globalUserLanguage"><%=user.language%></textarea>
+                                  <!--  <textarea class="hidden-input" name="globalUserLanguage"><%=user.language%></textarea>-->
                                     <textarea class="hidden-input" name="globalUserProfilePicture"><%=user.profilePicture%></textarea>
                                     <img class="accept-friend-request" onclick="document.getElementById('form-accept-<%=user.username%>-request').submit();" src="images/icons/green-checkmark.png">
                                 </form>
@@ -245,7 +262,7 @@
                                     <%}%>
                                     <img class="friend-profile-picture" src="<%=user.profilePicture%>">
                                     <h5 class="friend-name"><%=user.username%></h5>
-                                    <em class="friend-language"><%=user.language%></em>
+                                    <!--<em class="friend-language"><%=user.language%></em>-->
                                     <div class="friend-backboard"></div>
                                     <!--<img src="images/talk/right-arrow.png" class="arrow-right">-->
                                 </a>
@@ -260,8 +277,9 @@
                         <div class="chat-div" data-userid="#<%=user._id%>">
                             <div class="user-status chat-friend-status"></div>
                             <img class="chat-friend-profile-picture" src="<%=user.profilePicture%>">
-                            <h2 class="chat-friend-name"><strong><%=user.username%> - </strong><em><%=user.language%></em></h2>
-                            <a href="#"><img class="image-chat-call" src="images/icons/talk-phone.png"></a>
+                            <h2 class="chat-friend-name"><strong><%=user.username%></strong><!---<em><%=user.language%></em>--></h2>
+                            <br><br><br><br>
+                            <!--<a href="#"><img class="image-chat-call" src="images/icons/talk-phone.png"></a>-->
                             <div class="chat-history-div"></div>
                             <form action="" id="form-send-message">
                                 <textarea class="hidden-input"><%=user.username%></textarea>

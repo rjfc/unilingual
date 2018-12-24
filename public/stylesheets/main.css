@@ -168,7 +168,7 @@ footer {
     position: absolute;
     width: 43.1vh;
     height: 89px;
-    bottom: 83px;
+    bottom: 61px;
     opacity: 0.3;
     left: -20px;
 }
@@ -391,12 +391,12 @@ h5 {
     text-decoration: none;
 }
 
-#features > .container > .row > .four > h4 {
+#features > .container > .row > .six > h4 {
     margin-top: -20px;
     color: #3ECF8E;
 }
 
-#features > .container > .row > .four > p {
+#features > .container > .row > .six > p {
     padding-left: 30px;
     padding-right: 30px;
     font-family: 'Lato', sans-serif;
@@ -603,7 +603,7 @@ h5 {
     height: 15px;
 }
 
-#features > .container > .row > .four > img {
+#features > .container > .row > .six > img {
     margin-top: 90px;
     width: 250px;
 }
@@ -826,6 +826,16 @@ h5 {
     border: none;
 }
 
+#hint-refresh-page {
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    background: none;
+    height: 30px;
+    bottom: 86px;
+    font-style: italic;
+    border: none;
+}
+
 .popup .form-label {
     position: relative;
     bottom: 10px;
@@ -914,7 +924,7 @@ h5 {
         height: 320px;
     }
 
-    #features > .container > .row > .four > img {
+    #features > .container > .row > .six > img {
         margin-top: 90px;
         width: 150px;
     }
@@ -951,7 +961,7 @@ h5 {
         height: 385px;
     }
 
-    #features > .container > .row > .four > img {
+    #features > .container > .row > .six > img {
         margin-top: 90px;
         width: 220px;
     }
@@ -990,7 +1000,7 @@ h5 {
         height: 190px;
     }
 
-    #features > .container > .row > .four > img {
+    #features > .container > .row > .six > img {
         margin-top: 90px;
         width: 170px;
     }
@@ -1028,7 +1038,7 @@ h5 {
         top: 0;
         height: 260px;
     }
-    #features > .container > .row > .four > img {
+    #features > .container > .row > .six > img {
          margin-top: 90px;
          width: 220px;
     }
@@ -1067,7 +1077,7 @@ h5 {
         top: 0;
     }
 
-    #features > .container > .row > .four > img {
+    #features > .container > .row > .six > img {
         margin-top: 90px;
         width: 250px;
     }
@@ -1106,7 +1116,7 @@ h5 {
         top: 0;
     }
 
-    #features > .container > .row > .four > img {
+    #features > .container > .row > .six > img {
         margin-top: 90px;
         width: 250px;
     }

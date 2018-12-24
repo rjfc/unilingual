@@ -526,6 +526,22 @@ io.on('connection', function(socket){
             io.emit("offline", data.userId);
         }
     });
+    socket.on("join room", function(data) {
+        console.log(data.sender);
+        console.log(data.recipient);
+        var roomname;
+        if (data.recipient > data.sender) {
+            roomname = data.sender + "-" + data.recipient;
+        }
+        else {
+            roomname = data.recipient + "-" + data.sender;
+        }
+        if (!io.sockets.adapter.sids[users[data.sender]][roomname]) {
+            socket.join(roomname, function(){
+                console.log(data.sender + " joined " + roomname);
+            });
+        }
+    });
     socket.on("chat message", function(msg) {
         var roomname, languageSender, languageRecipient, languageCodeSender, languageCodeRecipient, translatedMessage;
         languageSender = msg.language;
@@ -631,7 +647,7 @@ io.on('connection', function(socket){
 
             console.log("Language code sender: " + languageCodeSender);
             console.log("Language code recipient: " + languageCodeRecipient);
-            if (msg.recipient > msg.sender) {
+            if (msg.recipient >= msg.sender) {
                 roomname = msg.sender + "-" + msg.recipient;
             }
             else {
